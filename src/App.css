@@ -3,24 +3,30 @@
 }
 
 body {
-  background: black
+  background: black;
 }
 
 .storyWrapper {
   padding: 2% 20%
 }
 
-
 h1, h3, p {
   color: white
 }
 
-.carrotTopImageIntro {
-  width: 80%;
+.carrotTopImageIntroWraper {
+
+}
+
+.carrotTopImageIntro, .carrotTopImageHome {
+  width: 500px;
+  position: absolute;
+  bottom: 0;
+  left: 0
 }
 
 .landingCarrotTopImage{
-  width: 100%;
+  width: 300px;
 }
 
 .landingWrapper{
@@ -32,6 +38,12 @@ h1, h3, p {
 }
 
 .introTextWrapper {
-  padding: 0 15%;
-  height: 9rem;
+  padding: 0 30px;
+  height: 700px;
+  /* border-radius: 5px;
+  border-color: 'white' */
+}
+
+.continueButton {
+
 }
