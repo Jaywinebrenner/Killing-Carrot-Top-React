@@ -4,29 +4,57 @@ import { AREAONE } from "../constants/Story";
 import carrotTop from "../media/carrot-top.png";
 import { Link } from "react-router-dom";
 import Stats from './Stats'
+import { WEAPONS } from "../constants/Weapons";
 
 const Home = () => {
 
+console.log("WEAPONS NAME", WEAPONS[0].name);
 
     let handDamage =  Math.floor(Math.random() * 2) + 1
-    let butterKnife = Math.floor(Math.random() * 3) + 1;
-     let trashCanLid = Math.floor(Math.random() * 4) + 1;
-     let twoByFour = Math.floor(Math.random() * 5) + 1;
+    let butterKnifeDamage = Math.floor(Math.random() * 3) + 1;
+     let trashCanLidDamage = Math.floor(Math.random() * 4) + 1;
+     let twoByFourDamage = Math.floor(Math.random() * 5) + 1;
 
 
      
      
-     
-     const [damage, setDamage] = useState(handDamage);
+    // RENDER BOOLEANS
+    const [doesGetWeaponExist, setDoesGetWeaponExist] = useState(true)
+    const [doesGetPlayerNameExist, setDoesGetPlayerNameExist] = useState(true);
+
+
+     const [damage, setDamage] = useState(1);
      const [name, setName] = useState(null)
      const [hitPoints, setHitPoints] = useState(20)
-     console.log("NAME", name);
-     console.log("DAMAGE", damage);
-     console.log("HIT POINTS", hitPoints);
-     
+     const [weapon, setWeapon] = useState("Hands");
 
+     
 const handleName = () => {
-  setName(name)
+  setDoesGetPlayerNameExist(false)
+}
+
+const handleSetButterKnife = () => {
+  setWeapon(WEAPONS[1].name)
+  setDamage(WEAPONS[1].damageString)
+}
+
+const handleSetTrashCanLid = () => {
+  setWeapon(WEAPONS[2].name);
+  setDamage(WEAPONS[2].damageString);
+};
+
+const handleSetTwoByFour = () => {
+  setWeapon(WEAPONS[3].name);
+  setDamage(WEAPONS[3].damageString);
+};
+
+const handleTakeNothing = () => {
+  setWeapon(WEAPONS[0].name);
+  setDamage(WEAPONS[0].damageString);
+};
+
+const submitWeapon = () => {
+  console.log("hi");
   
 }
 
@@ -39,29 +67,32 @@ const renderWeaponChoice = () => {
       </h3>
       <div className="answerGridWrapper">
         <div className="answerGridOne" id="butterKnifeSelection">
-          <h5 onClick={() => setDamage(butterKnife)}>A butter knife</h5>
+          <h5 onClick={handleSetButterKnife}>A butter knife</h5>
         </div>
 
         <div className="answerGridTwo">
-          <h5 onClick={() => setDamage(trashCanLid)}>A trash can lid</h5>
+          <h5 onClick={handleSetTrashCanLid}>A trash can lid</h5>
         </div>
 
         <div className="answerGridThree">
-          <h5 onClick={() => setDamage(twoByFour)}>A shower rod</h5>
+          <h5 onClick={handleSetTwoByFour}>A broken 2x4</h5>
         </div>
 
         <div className="answerGridFour">
-          <h5 onClick={() => setDamage(handDamage)}>Take nothing</h5>
+          <h5 onClick={handleTakeNothing}>Take nothing</h5>
         </div>
+      </div>
+      <div onClick={submitWeapon} className="continueButtonWrapper">
+        <h3 className="continueButtonText">CONTINUE</h3>
       </div>
     </div>
   );
 }
 
-    const getPlayerInfo = () => {
+    const getPlayerName = () => {
        return (
          <div>
-           <form>
+        
              <h3>What is thy name, Comedian Slayer?</h3>
              <input
                onChange={(event) => setName(event.target.value)}
@@ -71,9 +102,6 @@ const renderWeaponChoice = () => {
              <button onClick={handleName} type="button">
                Submit
              </button>
-           </form>
-            <h3>Greetings, {name}</h3>;
-
 
          </div>
        );
@@ -95,18 +123,27 @@ const renderWeaponChoice = () => {
       <div className="statWrapper">
         <Stats
           hitPoints={hitPoints}
-          // setHitPoints= {setHitPoints}
+          setHitPoints= {setHitPoints}
+          damage={damage}
+          setDamage={setDamage}
+          weapon={weapon}
+          setWeapon={setWeapon}
+          name={name}
+          setName={setName}
         />
-
-
         <div className="statColTwo">
           <h1>Pictures Here</h1>
         </div>
       </div>
 
-      <div className="introTextWrapper">
-        {getPlayerInfo()}
-        {renderWeaponChoice()}
+      <div className="gameWindowWrapper">
+        {doesGetPlayerNameExist 
+        ? getPlayerName()
+        : renderWeaponChoice()
+        }
+        
+        {/* {getPlayerName()}
+        {renderWeaponChoice()} */}
       </div>
       {/* <div className="carrotTopImageHomeWraper">
         <img className="carrotTopImageHome" src={carrotTop} />

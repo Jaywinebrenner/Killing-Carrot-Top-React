@@ -4,14 +4,15 @@ import { AREAONE } from "../constants/Story";
 import carrotTop from "../media/carrot-top.png";
 import { Link } from "react-router-dom";
 
-const Stats = ( { hitPoints, name, weapon}) => {
+const Stats = ( { hitPoints, name, weapon, damage}) => {
 
   return (
     <div className="statColOne">
       <h2>Comedian Slayer</h2>
-      <h3>Name:</h3>
+      <h3>Name: {name}</h3>
       <h3>Hit Points: {hitPoints}</h3>
-      <h3>Weapon: </h3>
+      <h3>Weapon: {weapon}</h3>
+      <h3>Damage: {damage}</h3>
     </div>
   );
 };
