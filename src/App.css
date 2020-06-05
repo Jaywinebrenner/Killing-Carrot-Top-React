@@ -111,3 +111,7 @@ border-right: 5px double white;
   margin-top: 0;
   margin-bottom: 0;
 }
+
+.gameWindowWrapper{
+  padding: 30px;
+}

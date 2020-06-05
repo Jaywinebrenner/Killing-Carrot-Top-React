@@ -5,57 +5,127 @@ import carrotTop from "../media/carrot-top.png";
 import { Link } from "react-router-dom";
 import Stats from './Stats'
 import { WEAPONS } from "../constants/Weapons";
+import { getPlayerName } from '../constants/Renders'
 
 const Home = () => {
 
-console.log("WEAPONS NAME", WEAPONS[0].name);
+  let handDamage =  Math.floor(Math.random() * 2) + 1
+  let butterKnifeDamage = Math.floor(Math.random() * 3) + 1;
+  let trashCanLidDamage = Math.floor(Math.random() * 4) + 1;
+  let twoByFourDamage = Math.floor(Math.random() * 5) + 1;
 
-    let handDamage =  Math.floor(Math.random() * 2) + 1
-    let butterKnifeDamage = Math.floor(Math.random() * 3) + 1;
-     let trashCanLidDamage = Math.floor(Math.random() * 4) + 1;
-     let twoByFourDamage = Math.floor(Math.random() * 5) + 1;
-
-
+  // RENDER BOOLEANS
+  const [getPlayerNameDisplayed, setGetPlayerNameDisplayed] = useState(true);
+  const [getWeaponDisplayed, setGetWeaponDisplayed] = useState(false)
+  const [isWeaponsChoiceButtonDisplayed, setIsWeaponsChoiceButtonDisplayed] = useState(false)
+  const [postRenderWeaponChoiceText, setPostRenderWeaponChoiceText] = useState(false);
+  const [isAreaOneDisplayed, setIsAreaOneDisplayed] = useState(false)
+  
+  // console.log("GET WEAPON DISPLAYED", getWeaponDisplayed);
+  // console.log("GETPLAYNAME DISPLAYED", getPlayerNameDisplayed);
+  // console.log("POST RENDER WEAPON CHOICE", postRenderWeaponChoiceText);
+  // console.log("AREA ONE", AREAONE.one)
+  
+  const [damage, setDamage] = useState(1);
+  const [name, setName] = useState(null)
+  const [hitPoints, setHitPoints] = useState(20)
+  const [weapon, setWeapon] = useState("Bare Hands");
+  
+  // console.log("WEAPON", weapon);
+  //    console.log("WEAPON STORY", WEAPONS[0].weaponPickUp);
      
-     
-    // RENDER BOOLEANS
-    const [doesGetWeaponExist, setDoesGetWeaponExist] = useState(true)
-    const [doesGetPlayerNameExist, setDoesGetPlayerNameExist] = useState(true);
+console.log("IS AREA ONE DISPLAYED", isAreaOneDisplayed);
 
-
-     const [damage, setDamage] = useState(1);
-     const [name, setName] = useState(null)
-     const [hitPoints, setHitPoints] = useState(20)
-     const [weapon, setWeapon] = useState("Hands");
-
-     
-const handleName = () => {
-  setDoesGetPlayerNameExist(false)
+  //CHOOSEING A NAME
+const submitName = () => {
+  setGetPlayerNameDisplayed (false);
+  setGetWeaponDisplayed(true)
 }
 
+const continueToAreaOneSubmit = () => {
+  setIsAreaOneDisplayed(true)
+  setPostRenderWeaponChoiceText(false)
+}
+
+
+//CHOOSING A WEAPON
 const handleSetButterKnife = () => {
   setWeapon(WEAPONS[1].name)
   setDamage(WEAPONS[1].damageString)
+  setIsWeaponsChoiceButtonDisplayed(true)
 }
 
 const handleSetTrashCanLid = () => {
   setWeapon(WEAPONS[2].name);
   setDamage(WEAPONS[2].damageString);
+   setIsWeaponsChoiceButtonDisplayed(true);
 };
 
 const handleSetTwoByFour = () => {
   setWeapon(WEAPONS[3].name);
   setDamage(WEAPONS[3].damageString);
+   setIsWeaponsChoiceButtonDisplayed(true);
 };
 
 const handleTakeNothing = () => {
   setWeapon(WEAPONS[0].name);
   setDamage(WEAPONS[0].damageString);
+   setIsWeaponsChoiceButtonDisplayed(true);
 };
 
 const submitWeapon = () => {
-  console.log("hi");
-  
+  setGetWeaponDisplayed(false)
+  setGetPlayerNameDisplayed(false)
+  setPostRenderWeaponChoiceText(true)
+   setIsWeaponsChoiceButtonDisplayed(false);
+}
+
+const renderPostWeaponChoiceText = () => {
+
+    if (weapon === "Bare Hands") {
+    return (
+    <div>
+      <h3>{WEAPONS[0].weaponPickUp}</h3>
+      <div onClick={continueToAreaOneSubmit} className="continueButtonWrapper">
+        <h3 className="continueButtonText">CONTINUE</h3>
+      </div>
+    </div>
+    )
+  }
+    if (weapon === "Butter Knife") {
+        return (
+          <div>
+            <h3>{WEAPONS[1].weaponPickUp}</h3>
+            <div
+              onClick={continueToAreaOneSubmit}
+              className="continueButtonWrapper"
+            >
+              <h3 className="continueButtonText">CONTINUE</h3>
+            </div>
+          </div>
+        );
+  }
+      if (weapon === "Trash Can Lid") {
+       return (
+    <div>
+      <h3>{WEAPONS[2].weaponPickUp}</h3>
+      <div onClick={continueToAreaOneSubmit} className="continueButtonWrapper">
+        <h3 className="continueButtonText">CONTINUE</h3>
+      </div>
+    </div>
+    )
+  }
+      if (weapon === "Broken 2x4") {
+    return (
+    <div>
+      <h3>{WEAPONS[3].weaponPickUp}</h3>
+      <div onClick={continueToAreaOneSubmit} className="continueButtonWrapper">
+        <h3 className="continueButtonText">CONTINUE</h3>
+      </div>
+    </div>
+    )
+  }
+    
 }
 
 const renderWeaponChoice = () => {
@@ -82,24 +152,36 @@ const renderWeaponChoice = () => {
           <h5 onClick={handleTakeNothing}>Take nothing</h5>
         </div>
       </div>
-      <div onClick={submitWeapon} className="continueButtonWrapper">
-        <h3 className="continueButtonText">CONTINUE</h3>
-      </div>
     </div>
   );
+}
+
+const renderWeaponChoiceSubmitButton = () => {
+  return (
+        <div onClick={submitWeapon} className="continueButtonWrapper">
+          <h3 className="continueButtonText">CONTINUE</h3>
+        </div>
+  )
+}
+
+const continueToAreaOneButton = () => {
+    return (
+      <div onClick={continueToAreaOneSubmit} className="continueButtonWrapper">
+        <h3 className="continueButtonText">CONTINUE</h3>
+      </div>
+    );
 }
 
     const getPlayerName = () => {
        return (
          <div>
-        
              <h3>What is thy name, Comedian Slayer?</h3>
              <input
                onChange={(event) => setName(event.target.value)}
                value={name}
              />
 
-             <button onClick={handleName} type="button">
+             <button onClick={submitName} type="button">
                Submit
              </button>
 
@@ -107,7 +189,12 @@ const renderWeaponChoice = () => {
        );
 }
 
+const renderAreaOne = () => {
+  return (
+<h3>{AREAONE.one}</h3>
 
+  )
+}
 
   return (
     <div className="homeWrapper">
@@ -119,17 +206,12 @@ const renderWeaponChoice = () => {
           <h1>KILLING CARROT TOP</h1>
         </div>
       </div>
-
       <div className="statWrapper">
         <Stats
           hitPoints={hitPoints}
-          setHitPoints= {setHitPoints}
           damage={damage}
-          setDamage={setDamage}
           weapon={weapon}
-          setWeapon={setWeapon}
           name={name}
-          setName={setName}
         />
         <div className="statColTwo">
           <h1>Pictures Here</h1>
@@ -137,13 +219,11 @@ const renderWeaponChoice = () => {
       </div>
 
       <div className="gameWindowWrapper">
-        {doesGetPlayerNameExist 
-        ? getPlayerName()
-        : renderWeaponChoice()
-        }
-        
-        {/* {getPlayerName()}
-        {renderWeaponChoice()} */}
+        {getPlayerNameDisplayed && getPlayerName()}
+        {getWeaponDisplayed && renderWeaponChoice()}
+        {isWeaponsChoiceButtonDisplayed && renderWeaponChoiceSubmitButton()}
+        {postRenderWeaponChoiceText && renderPostWeaponChoiceText()}
+        {isAreaOneDisplayed && renderAreaOne()}
       </div>
       {/* <div className="carrotTopImageHomeWraper">
         <img className="carrotTopImageHome" src={carrotTop} />

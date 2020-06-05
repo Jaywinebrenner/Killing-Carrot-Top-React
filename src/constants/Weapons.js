@@ -6,7 +6,7 @@ export let WEAPONS = [
            damage: 2,
            weaponHealth: null,
            weaponPickUp:
-             "You didn't grab a weapon and simply opt to battle the Illuimiati of Laughter with your fists. Brave, yet foolish",
+             "You didn't grab a weapon and simply opt to battle the Illuimiati of Laughter with your bare fists. Some call this bravery. Others call this foolishness",
          },
          {
            id: 1,
@@ -33,7 +33,7 @@ export let WEAPONS = [
            damage: 10,
            weaponHealth: 2,
            weaponPickUp:
-             "You admire the broken 2x4 and lick your lips at the prospect of spilling comedian blood with it.",
+             "You admire the splintered, broken 2x4 and lick your lips at the prospect of spilling comedian blood with it.",
          },
        ];
 
