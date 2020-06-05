@@ -10,7 +10,7 @@ body {
   padding: 2% 20%
 }
 
-h1, h3, p {
+h1, h2, h3, h4, h5, p {
   color: white
 }
 
@@ -38,12 +38,60 @@ h1, h3, p {
 }
 
 .introTextWrapper {
-  padding: 0 30px;
-  height: 700px;
+
   /* border-radius: 5px;
   border-color: 'white' */
 }
 
 .continueButton {
+
+}
+
+.answerGridWrapper{
+ display: grid;
+column-gap: 0em;
+ grid-template-columns: repeat(4, 1fr);
+}
+
+.headerWrapper{
+   display: grid;
+column-gap: 0em;
+ grid-template-columns: 1fr 5fr;
+ border-bottom: 3px solid white;
+ text-align: center;
+}
+
+.headerColOne{
+border-right: 5px double white;
+}
+
+.headerColTwo{
+ text-align: center;
+}
+
+.homeWrapper{
+ text-align: center;
+ border: 5px double white;
+width: 1000px;
+height: 700px;
+margin: 0 auto;
+margin-top: 30px;
+}
+
+.statWrapper{
+  height: 300px;
+   display: grid;
+column-gap: 0em;
+ grid-template-columns: 300px 400px;
+ border-bottom: 5px double white;
+text-align: left;
+padding-left: 20px;
+}
+
+.statColOne{
+border-right: 5px double white;
+}
+
+.statColTwo{
 
 }
