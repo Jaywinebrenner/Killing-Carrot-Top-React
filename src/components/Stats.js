@@ -11,11 +11,11 @@ const Stats = ( { hitPoints, name, weapon, damage, defence}) => {
   return (
     <div className="statColOne">
       <h2>Comedian Slayer</h2>
-      <h3>Name: {name}</h3>
-      <h3>Hit Points: {hitPoints}</h3>
-      <h3>Defence: {defence}</h3>
-      <h3>Weapon: {weapon}</h3>
-      <h3>Damage: {damage}</h3>
+      <h4 className="statText">Name: {name}</h4>
+      <h4 className="statText">Hit Points: {hitPoints}</h4>
+      <h4 className="statText">Defence: {defence}</h4>
+      <h4 className="statText">Weapon: {weapon}</h4>
+      <h4 className="statText">Damage: {damage}</h4>
     </div>
   );
 };
