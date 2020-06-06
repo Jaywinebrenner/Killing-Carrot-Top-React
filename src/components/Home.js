@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { INTRO } from "../constants/Story";
 import { AREAONE } from "../constants/Story";
 import carrotTop from "../media/carrot-top.png";
@@ -29,7 +29,9 @@ const Home = () => {
   const [damage, setDamage] = useState(1);
   const [name, setName] = useState(null)
   const [hitPoints, setHitPoints] = useState(20)
+  const [defence, setDefence] = useState(0)
   const [weapon, setWeapon] = useState("Bare Hands");
+
   
   // console.log("WEAPON", weapon);
   //    console.log("WEAPON STORY", WEAPONS[0].weaponPickUp);
@@ -212,6 +214,7 @@ const renderAreaOne = () => {
           damage={damage}
           weapon={weapon}
           name={name}
+          defence={defence}
         />
         <div className="statColTwo">
           <h1>Pictures Here</h1>

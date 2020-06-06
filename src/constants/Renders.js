@@ -1,4 +1,5 @@
 // import React, {useState} from "react";
+// import Home from '../components/Home'
 
 // export const getPlayerName = () => {
 //   return (
