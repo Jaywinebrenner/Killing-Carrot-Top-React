@@ -18,9 +18,14 @@ const pressStartGame = () => {
       styles={{ backgroundImage: `url(${carrotTop})` }}
       className="landingWrapper"
     >
-      <h1 className="header">KILLING CARROT TOP</h1>
+      <h1
+        className="headerText">
+        KILLING CARROT TOP
+      </h1>
       <Link style={{ textDecoration: "none" }} to="/Intro">
-        <h1 onClick={pressStartGame} className="header">
+        <h1
+          onClick={pressStartGame}
+          className="header">
           START GAME
         </h1>
       </Link>

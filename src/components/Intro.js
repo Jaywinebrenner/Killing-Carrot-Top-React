@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 
 const Intro = () => {
 
-
-
 const renderIntroText = () => {
   return (
     <div>
@@ -22,11 +20,9 @@ const renderIntroText = () => {
   );
 };
 
-  
-
     return (
       <div className="introWrapper">
-        <h1 className="header">KILLING CARROT TOP</h1>
+        <h1 className="headerText">KILLING CARROT TOP</h1>
         <div className="introTextWrapper"> {renderIntroText()} </div>
 
         <div className="carrotTopImageIntroWraper">

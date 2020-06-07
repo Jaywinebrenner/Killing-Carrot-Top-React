@@ -10,10 +10,7 @@ import Battle from './Battle'
 
 const Home = () => {
 
-  let handDamage =  Math.floor(Math.random() * 2) + 1
-  let butterKnifeDamage = Math.floor(Math.random() * 3) + 1;
-  let trashCanLidDamage = Math.floor(Math.random() * 4) + 1;
-  let twoByFourDamage = Math.floor(Math.random() * 5) + 1;
+
 
   // RENDER BOOLEANS
 
@@ -22,6 +19,7 @@ const Home = () => {
   const [hitPoints, setHitPoints] = useState(20)
   const [defence, setDefence] = useState(0)
   const [weapon, setWeapon] = useState("Bare Hands");
+  const [battleTextDisplayed, setBattleTextDisplayed] = useState(false)
 
   
 
@@ -47,8 +45,6 @@ const submitName = () => {
   setGetPlayerNameDisplayed (false);
   setGetWeaponDisplayed(true)
 }
-
-
 
 //2- CHOOSING A WEAPON--Before you embark on your perilous journey, you must pick one of three weapons at your disposal.
   const [getWeaponDisplayed, setGetWeaponDisplayed] = useState(false);
@@ -296,15 +292,14 @@ const submitName = () => {
     <div className="homeWrapper">
       <div className="headerWrapper">
         <div className="headerColOne">
-          <h1>Column 1</h1>
+          <img className="carrotTopThumbNail" src={carrotTop} />
         </div>
         <div className="headerColTwo">
-          <h1>KILLING CARROT TOP</h1>
+          <h1 className="headerText">KILLING CARROT TOP</h1>
         </div>
       </div>
 
       <div className="statWrapper">
-
         <div className="statColOne">
           <Stats
             hitPoints={hitPoints}
@@ -317,7 +312,20 @@ const submitName = () => {
 
         <div className="statColTwo">
           <h2 className="battleHeaderText">Battle Text</h2>
-          <Battle/>
+          <Battle
+            hitPoints={hitPoints}
+            setHitPoints={setHitPoints}
+            damage={damage}
+            setDamage={setDamage}
+            weapon={weapon}
+            setWeapon={setWeapon}
+            name={name}
+            setName={setName}
+            defence={defence}
+            setDefence={setDefence}
+            battleTextDisplayed={battleTextDisplayed}
+            setBattleTextDisplayed={setBattleTextDisplayed}
+          />
         </div>
 
         <div className="statColThree">

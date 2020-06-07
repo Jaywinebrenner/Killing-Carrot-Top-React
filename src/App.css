@@ -1,5 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
+
+
 .App {
   text-align: center;
+}
+
+.headerText{
+  font-family: 'Metal Mania', cursive;
+  letter-spacing: 23px;
+  font-size: 48px;
+  color :#8a0303;
+  margin: 0;
+padding-top: 8px;
 }
 
 body {
@@ -43,10 +55,6 @@ h1, h2, h3, h4, h5, p {
   border-color: 'white' */
 }
 
-.continueButton {
-
-}
-
 .answerGridWrapper{
  display: grid;
 column-gap: 0em;
@@ -56,13 +64,17 @@ column-gap: 0em;
 .headerWrapper{
    display: grid;
 column-gap: 0em;
- grid-template-columns: 1fr 5fr;
+ grid-template-columns: 1fr 7fr;
  border-bottom: 3px solid white;
  text-align: center;
 }
 
 .headerColOne{
 border-right: 5px double white;
+}
+
+.carrotTopThumbNail{
+  height: 75px;
 }
 
 .headerColTwo{
