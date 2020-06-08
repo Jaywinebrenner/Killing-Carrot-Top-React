@@ -5,6 +5,7 @@ import Stats from './Stats'
 import { WEAPONS } from "../constants/Weapons";
 import Battle from './Battle'
 
+
 const Home = () => {
 
 
@@ -19,9 +20,7 @@ const Home = () => {
   const [damageString, setDamageString] = useState("1-2")
   const [battleTextDisplayed, setBattleTextDisplayed] = useState(false)
 
-  const [enemyHitPoints, setEnemyHitPoints] = useState(null)
-  const [enemyDamage, setEnemyDamage] = useState(null);
-  const [enemyDefence, setEnemyDefence] = useState(null);
+
 
   //1- What is thy name, Comedian Slayer?
   const [getPlayerNameDisplayed, setGetPlayerNameDisplayed] = useState(true);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MONSTERS } from "../constants/Monsters";
+import { emoPhilips, timAllen, judyTenuda } from "../constants/Monsters";
 import { Redirect } from "react-router-dom";
 import { RUN } from "../constants/Story";
 
@@ -18,11 +18,18 @@ const Battle = ({
   setBattleTextDisplayed,
 }) => {
 
-  const [isRunDisplayed, setIsRunDisplayed] = useState(false);
-const [redirect, setRedirect] = useState(null)
-  let emoPhilips = MONSTERS.emoPhilips.name;
+    const [enemyHitPoints, setEnemyHitPoints] = useState(null);
+    const [enemyDamage, setEnemyDamage] = useState(null);
+    const [enemyDefence, setEnemyDefence] = useState(null);
 
-  console.log("DAMAGE ON BATTLE JS", damage)
+    useEffect(() => {
+        setEnemyHitPoints(emoPhilips.hitPoints);
+      }, []);
+
+
+
+    const [isRunDisplayed, setIsRunDisplayed] = useState(false);
+    const [redirect, setRedirect] = useState(null)
 
   const beginAttack = () => {
     let twentySidedDie = Math.floor(Math.random() * 20) + 1;
@@ -41,14 +48,12 @@ const [redirect, setRedirect] = useState(null)
 
   const playerAttack = () => {
     let twentySidedDie = Math.floor(Math.random() * 20) + 1;
-    if (twentySidedDie >= MONSTERS.emoPhilips.defence) {
+    if (twentySidedDie >= emoPhilips.defence) {
       console.log("PLAYER ATTACK DIE ROLL", twentySidedDie);
-      MONSTERS.emoPhilips.hitPoints -= damage;
+      setEnemyHitPoints(enemyHitPoints - damage)
+      emoPhilips.hitPoints -= damage;
       console.log("YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE", damage);
-      console.log(
-        "EMO PHILIPS HAS THIS MANY HIT POINTS LEFT",
-        MONSTERS.emoPhilips.hitPoints,
-      );
+      console.log("EMO PHILIPS HAS THIS MANY HIT POINTS LEFT", enemyHitPoints);
       isEnemyDeadCheck();
     } else {
       console.log("YOU SWING AT YOUR FOE AND MISS HORRIBLY");
@@ -59,8 +64,8 @@ const [redirect, setRedirect] = useState(null)
     let twentySidedDie = Math.floor(Math.random() * 20) + 1;
     if (twentySidedDie >= defence) {
       console.log("your foe attacks you with a roll of", twentySidedDie);
-      setHitPoints((hitPoints -= MONSTERS.emoPhilips.damage));
-      console.log("and hits you for: ", MONSTERS.emoPhilips.damage);
+      setHitPoints(hitPoints -= emoPhilips.damage);
+      console.log("and hits you for: ", emoPhilips.damage);
       console.log("You have THIS MANY HIT POINTS LEFT", hitPoints);
       isPlayerDeadCheck();
     } else {
@@ -71,15 +76,11 @@ const [redirect, setRedirect] = useState(null)
   const isPlayerDeadCheck = () => {
       if (hitPoints <= 0) {
           console.log("YOU HAVE DIED!!!")
-
       }
   }
-console.log("Emo's Hit points", emoPhilips.hitpoints);
-console.log("My Hit Points", hitPoints);
-
 
     const isEnemyDeadCheck = () => {
-      if (MONSTERS.emoPhilips.hitpoints <= 0) {
+      if (emoPhilips.hitPoints <= 0) {
           console.log("YOU HAVE DEFEATED YOUR FOE!!!");
       }
   }
@@ -91,7 +92,6 @@ console.log("My Hit Points", hitPoints);
   const handleRunButton = () => {
     setIsRunDisplayed(true);
   };
-
 
   const renderRun = () => {
     return <h5>{RUN[Math.floor(Math.random() * RUN.length)]}</h5>;
