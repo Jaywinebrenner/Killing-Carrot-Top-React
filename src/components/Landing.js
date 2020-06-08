@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const Landing = () => {
 
 const [startGame, setStartGame] = useState(false)
-console.log(startGame);
 
 const pressStartGame = () => {
     setStartGame(true)

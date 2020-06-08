@@ -3,6 +3,8 @@ import { emoPhilips, timAllen, judyTenuda } from "../constants/Monsters";
 import { Redirect } from "react-router-dom";
 import { RUN } from "../constants/Story";
 
+// Need to figure out Double damage, importing enemies upon battle
+
 const Battle = ({
   hitPoints,
   setHitPoints,
@@ -26,8 +28,6 @@ const Battle = ({
         setEnemyHitPoints(emoPhilips.hitPoints);
       }, []);
 
-
-
     const [isRunDisplayed, setIsRunDisplayed] = useState(false);
     const [redirect, setRedirect] = useState(null)
 
@@ -48,16 +48,24 @@ const Battle = ({
 
   const playerAttack = () => {
     let twentySidedDie = Math.floor(Math.random() * 20) + 1;
-    if (twentySidedDie >= emoPhilips.defence) {
-      console.log("PLAYER ATTACK DIE ROLL", twentySidedDie);
-      setEnemyHitPoints(enemyHitPoints - damage)
-      emoPhilips.hitPoints -= damage;
-      console.log("YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE", damage);
-      console.log("EMO PHILIPS HAS THIS MANY HIT POINTS LEFT", enemyHitPoints);
-      isEnemyDeadCheck();
-    } else {
-      console.log("YOU SWING AT YOUR FOE AND MISS HORRIBLY");
+    console.log("PLAYER ATTACK ROLL ________", twentySidedDie)
+    if (twentySidedDie === 20) {
+        doubleDamageVsEnemy();
+        return;
     }
+      if (twentySidedDie >= emoPhilips.defence) {
+        console.log("PLAYER ATTACK DIE ROLL", twentySidedDie);
+        setEnemyHitPoints(enemyHitPoints - damage);
+        emoPhilips.hitPoints -= damage;
+        console.log("YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE", damage);
+        console.log(
+          "EMO PHILIPS HAS THIS MANY HIT POINTS LEFT",
+          enemyHitPoints,
+        );
+        isEnemyDeadCheck();
+      } else {
+        console.log("YOU SWING AT YOUR FOE AND MISS HORRIBLY");
+      }
   };
 
   const enemyAttack = () => {
@@ -85,8 +93,16 @@ const Battle = ({
       }
   }
 
-  const DoubleDamageVsEnemy = () => {
 
+  //FIGURE THIS OUT
+  const doubleDamageVsEnemy = () => {
+    console.log("YOU ROLLED A 20 AND UNLEASH A DEEP BELLOWING HOWL AS YOU TRASH YOUR FOE FOR DOUBLE DAMAGE")
+    setEnemyHitPoints(enemyHitPoints - (damage * 2));
+    console.log("YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE", damage);
+    console.log(
+        "EMO PHILIPS HAS THIS MANY HIT POINTS LEFT",
+        enemyHitPoints,
+        );
   }
 
   const handleRunButton = () => {
