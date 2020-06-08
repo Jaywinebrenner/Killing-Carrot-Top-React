@@ -1,11 +1,8 @@
 import React, {useState, useEffect} from "react";
-import { INTRO } from "../constants/Story";
 import { AREAONE } from "../constants/Story";
 import carrotTop from "../media/carrot-top.png";
-import { Link } from "react-router-dom";
 import Stats from './Stats'
 import { WEAPONS } from "../constants/Weapons";
-import { getPlayerName } from '../constants/Renders'
 import Battle from './Battle'
 
 const Home = () => {
@@ -14,14 +11,17 @@ const Home = () => {
 
   // RENDER BOOLEANS
 
-  const [damage, setDamage] = useState(1);
   const [name, setName] = useState(null)
   const [hitPoints, setHitPoints] = useState(20)
-  const [defence, setDefence] = useState(0)
+  const [damage, setDamage] = useState(1);
+  const [defence, setDefence] = useState(8)
   const [weapon, setWeapon] = useState("Bare Hands");
+  const [damageString, setDamageString] = useState("1-2")
   const [battleTextDisplayed, setBattleTextDisplayed] = useState(false)
 
-  
+  const [enemyHitPoints, setEnemyHitPoints] = useState(null)
+  const [enemyDamage, setEnemyDamage] = useState(null);
+  const [enemyDefence, setEnemyDefence] = useState(null);
 
   //1- What is thy name, Comedian Slayer?
   const [getPlayerNameDisplayed, setGetPlayerNameDisplayed] = useState(true);
@@ -55,22 +55,26 @@ const submitName = () => {
 
   const handleSetButterKnife = () => {
     setWeapon(WEAPONS[1].name)
-    setDamage(WEAPONS[1].damageString)
+    setDamage(WEAPONS[1].damage)
+    setDamageString(WEAPONS[1].damageString)
     setIsWeaponsChoiceButtonDisplayed(true)
   }
   const handleSetTrashCanLid = () => {
     setWeapon(WEAPONS[2].name);
-    setDamage(WEAPONS[2].damageString);
+    setDamage(WEAPONS[2].damage);
+    setDamageString(WEAPONS[2].damageString);
      setIsWeaponsChoiceButtonDisplayed(true);
   };
   const handleSetTwoByFour = () => {
     setWeapon(WEAPONS[3].name);
-    setDamage(WEAPONS[3].damageString);
+    setDamage(WEAPONS[3].damage);
+    setDamageString(WEAPONS[3].damageString);
      setIsWeaponsChoiceButtonDisplayed(true);
   };
   const handleTakeNothing = () => {
     setWeapon(WEAPONS[0].name);
-    setDamage(WEAPONS[0].damageString);
+    setDamage(WEAPONS[0].damage);
+    setDamageString(WEAPONS[0].damageString);
      setIsWeaponsChoiceButtonDisplayed(true);
   };
   const submitWeapon = () => {
@@ -304,6 +308,7 @@ const submitName = () => {
           <Stats
             hitPoints={hitPoints}
             damage={damage}
+            damageString={damageString}
             weapon={weapon}
             name={name}
             defence={defence}

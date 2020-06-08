@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { MONSTERS } from "../constants/Monsters";
-import { Redirect } from "react-router-dom";
-import { RUN } from "../constants/Story";
 
 const Battle = ({
   hitPoints,
@@ -17,31 +15,35 @@ const Battle = ({
   battleTextDisplayed,
   setBattleTextDisplayed,
 }) => {
-
+  const [isPlayerDead, setPlayerDead] = useState(false);
+  const [isEnemyDead, setIsEnemyDead] = useState(false);
+  const [isPlayerAttacking, setIsPlayerAttacking] = useState(false);
+  const [enemyIsAttacking, setEnemyIsAttacking] = useState(false);
   const [isRunDisplayed, setIsRunDisplayed] = useState(false);
-const [redirect, setRedirect] = useState(null)
+  const [
+    isPlayerWonInitativeDisplayed,
+    setIsPlayerWonInitiativeDisplayed,
+  ] = useState(false);
+  const [
+    isEnemyWonInitativeDisplayed,
+    setIsEnemyWonInitiativeDisplayed,
+  ] = useState(false);
+  const [numberOfAttacks, setNumberOfAttacks] = useState(0);
+
   let emoPhilips = MONSTERS.emoPhilips.name;
 
-  console.log("DAMAGE ON BATTLE JS", damage)
-
-  const beginAttack = () => {
+const beginAttack = () => {
     let twentySidedDie = Math.floor(Math.random() * 20) + 1;
-    if (twentySidedDie >= 5) {
-        console.log("INITIATIVE ROLL= ", twentySidedDie);
-         console.log("You have won intiiative and attack the foul createure");
-        playerAttack();
-        enemyAttack();
-    } else {
-        console.log("INITIATIVE ROLL= ", twentySidedDie);
-        console.log("Your Foe has won intiiative and attacks you");
-        enemyAttack();
-        playerAttack();
-    }
-  };
+    console.log("INITIATIVE DIE ROLL", twentySidedDie);
+    playerAttack()
+    enemyAttack()
+}
 
   const playerAttack = () => {
     let twentySidedDie = Math.floor(Math.random() * 20) + 1;
+
     if (twentySidedDie >= MONSTERS.emoPhilips.defence) {
+
       console.log("PLAYER ATTACK DIE ROLL", twentySidedDie);
       MONSTERS.emoPhilips.hitPoints -= damage;
       console.log("YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE", damage);
@@ -49,12 +51,14 @@ const [redirect, setRedirect] = useState(null)
         "EMO PHILIPS HAS THIS MANY HIT POINTS LEFT",
         MONSTERS.emoPhilips.hitPoints,
       );
-      isEnemyDeadCheck();
+      console.log("number of attacks IN PLAYER ATTACK", numberOfAttacks);
     } else {
       console.log("YOU SWING AT YOUR FOE AND MISS HORRIBLY");
+      setIsPlayerAttacking(false);
+      setEnemyIsAttacking(true);
     }
   };
-
+  console.log("number of attacks BODY", numberOfAttacks);
   const enemyAttack = () => {
     let twentySidedDie = Math.floor(Math.random() * 20) + 1;
     if (twentySidedDie >= defence) {
@@ -62,42 +66,49 @@ const [redirect, setRedirect] = useState(null)
       setHitPoints((hitPoints -= MONSTERS.emoPhilips.damage));
       console.log("and hits you for: ", MONSTERS.emoPhilips.damage);
       console.log("You have THIS MANY HIT POINTS LEFT", hitPoints);
-      isPlayerDeadCheck();
+      return (
+        <div>
+          <h5></h5>
+        </div>
+      );
     } else {
       console.log("YOUR FOE HAS SWUNG AND MISSED YOU");
+      setIsPlayerAttacking(true);
+      setEnemyIsAttacking(false);
     }
   };
-
-  const isPlayerDeadCheck = () => {
-      if (hitPoints <= 0) {
-          console.log("YOU HAVE DIED!!!")
-
-      }
-  }
-console.log("Emo's Hit points", emoPhilips.hitpoints);
-console.log("My Hit Points", hitPoints);
-
-
-    const isEnemyDeadCheck = () => {
-      if (MONSTERS.emoPhilips.hitpoints <= 0) {
-          console.log("YOU HAVE DEFEATED YOUR FOE!!!");
-      }
-  }
-
-  const DoubleDamageVsEnemy = () => {
-
-  }
 
   const handleRunButton = () => {
     setIsRunDisplayed(true);
   };
-
-
   const renderRun = () => {
-    return <h5>{RUN[Math.floor(Math.random() * RUN.length)]}</h5>;
+    return (
+      <h5>
+        "The sky darkens to an unfathomable black as blood rains from the sky in
+        thick torrents. Skeletal hands burst from the earth. The wailing of
+        hungry children and screaming lambs trumpet from near to far. Humanities
+        fate is doomed to enslavement via the Illuimiati of Laughter. They have
+        won. They reign supreme over all of humanity. For you...Are a coward. "
+      </h5>
+    );
   };
 
+  if (isPlayerAttacking) {
+    playerAttack();
+    setIsPlayerAttacking(false);
+  }
 
+  if (enemyIsAttacking) {
+    enemyAttack();
+    setEnemyIsAttacking(false);
+  }
+
+  // const preventRerenderDuringPlayerAttack = () => {
+  //   setIsPlayerAttacking(false);
+  // };
+  // const preventRerenderDuringEnemyAttack = () => {
+  //     setEnemyIsAttacking(false);
+  // };
 
   return (
     <div>
@@ -116,8 +127,8 @@ console.log("My Hit Points", hitPoints);
         <div>
           <h5>Battle Display Text</h5>
           {isRunDisplayed && renderRun()}
-          {/* {isPlayerWonInitativeDisplayed && renderInitiative()}
-          {isEnemyWonInitativeDisplayed && renderInitiative()} */}
+          {isPlayerWonInitativeDisplayed && renderInitiative()}
+          {isEnemyWonInitativeDisplayed && renderInitiative()}
         </div>
       </div>
     </div>
