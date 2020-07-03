@@ -2,7 +2,7 @@ export const emoPhilips = {
     name: "emoPhilips",
     hitPoints: 10,
     damage: 2,
-    defence: 0,
+    defence: 3,
   };
 
   export const timAllen = {
@@ -20,4 +20,6 @@ export const emoPhilips = {
   };
 
 // DEFENSE IS THE NUMBER TO HIT ON A ROLL OF 20. Higher the better.
+
+
 

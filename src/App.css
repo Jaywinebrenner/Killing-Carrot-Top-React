@@ -23,7 +23,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, p {
-  color: white
+  color: white;
+  margin-bottom: 3;
 }
 
 .carrotTopImageIntroWraper {
@@ -130,7 +131,7 @@ line-height: 3px;
   width: 190px;
   height: 40px;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 80px;
 
 }
 
@@ -185,6 +186,7 @@ column-gap: 0em;
   width: 90px;
   height: 30px;
 margin-right: 20px;
+margin-bottom: 20px;
 }
 
 
@@ -208,4 +210,18 @@ margin-right: 20px;
 
 .battleHeaderText{
   margin: 0 0 5 0;;
+}
+
+.battleText{
+  margin: 0;
+  line-height: 0;
+}
+
+.emo{
+  width: 250px;
+}
+
+.testText{
+  font-size: 30px;
+  color: white;
 }

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { emoPhilips, timAllen, judyTenuda } from "../constants/Monsters";
+import { emoPhilips, timAllen, judyTenuda } from "../../constants/Monsters";
 import { Redirect } from "react-router-dom";
-import { RUN } from "../constants/Story";
-import { twentySidedDie } from "../constants/Dice";
+import { RUN } from "../../constants/Story";
+import { twentySidedDie } from "../../constants/Dice";
 
-// Need to figure out Double damage, importing enemies upon battle
+// Need to figure out Double damage, importing enemies upon BattleNewApproach
 
-
-const Battle = ({
+const BattleNewApproach = ({
   hitPoints,
   setHitPoints,
   name,
@@ -20,17 +19,24 @@ const Battle = ({
   setDefence,
   battleTextDisplayed,
   setBattleTextDisplayed,
+  battleEmo
 }) => {
   const [enemyHitPoints, setEnemyHitPoints] = useState(null);
   const [enemyDamage, setEnemyDamage] = useState(null);
   const [enemyDefence, setEnemyDefence] = useState(null);
 
-const [isPlayerWonInitiativeVisible, setIsPlayerWonInitiativeVisible] = useState(false);
-const [isEnemyWonInitiativeVisible, setIsEnemyWonInitiativeVisible] = useState(false)
+  const [
+    isPlayerWonInitiativeVisible,
+    setIsPlayerWonInitiativeVisible,
+  ] = useState(false);
+  const [
+    isEnemyWonInitiativeVisible,
+    setIsEnemyWonInitiativeVisible,
+  ] = useState(false);
 
-//  const togglePlayerWonInitiative = () => {
-//        setIsPlayerWonInitiativeVisible(!isPlayerWonInitiativeVisible);
-//  }
+  //  const togglePlayerWonInitiative = () => {
+  //        setIsPlayerWonInitiativeVisible(!isPlayerWonInitiativeVisible);
+  //  }
 
   // let emoPhilipsHitPoints = setEnemyHitPoints(emoPhilips.hitPoints);
   // console.log("EMO INITAL HPS", emoPhilipsHitPoints);
@@ -49,14 +55,11 @@ const [isEnemyWonInitiativeVisible, setIsEnemyWonInitiativeVisible] = useState(f
 
   const [isRunDisplayed, setIsRunDisplayed] = useState(false);
 
-
-
   let initiativeRoll = null;
   const beginAttack = () => {
-  setIsPlayerWonInitiativeVisible(false);
-  setIsEnemyWonInitiativeVisible(false);
+    setIsPlayerWonInitiativeVisible(false);
+    setIsEnemyWonInitiativeVisible(false);
 
-  
     let twentySidedDie = Math.floor(Math.random() * 20) + 1;
     if (twentySidedDie >= 5) {
       console.log("INITIATIVE ROLL= ", twentySidedDie);
@@ -64,7 +67,6 @@ const [isEnemyWonInitiativeVisible, setIsEnemyWonInitiativeVisible] = useState(f
       playerAttack();
       enemyAttack();
       setIsPlayerWonInitiativeVisible(true);
-
     } else {
       console.log("INITIATIVE ROLL= ", twentySidedDie);
       console.log("Your Foe has won intiiative and attacks you");
@@ -174,63 +176,58 @@ const [isEnemyWonInitiativeVisible, setIsEnemyWonInitiativeVisible] = useState(f
   };
 
   const renderPlayerWonInitiative = () => {
-     return (
-       <div>
-         <h5 className="battleText">The initiative roll is {twentySidedDie}</h5>;
-         <h5 className="battleText">
-           You have won intiiative and attack the foul creature
-         </h5>
-         ;
-       </div>
-     );
-  }
-
-  const renderEnemyWonInitiative = (twentySidedDie) => {
     return (
       <div>
         <h5 className="battleText">The initiative roll is {twentySidedDie}</h5>;
         <h5 className="battleText">
-          Your foe has won initiative and attacks!
+          You have won intiiative and attack the foul creature
         </h5>
         ;
       </div>
     );
   };
 
+  const renderEnemyWonInitiative = (twentySidedDie) => {
+    return (
+      <div>
+        <h5 className="battleText">The initiative roll is {twentySidedDie}</h5>;
+        <h5 className="battleText">Your foe has won initiative and attacks!</h5>
+        ;
+      </div>
+    );
+  };
 
-const renderBattleButtons = () => {
-  return (
-        <div>
-      <div className="battleButtonsWrapper">
-        <div className="attackButtonWrapper">
-          <h5 onClick={() => beginAttack()} className="attackButtonText">
-            Attack
-          </h5>
-        </div>
-        <div className="runButtonWrapper">
-          <h5 onClick={() => handleRunButton()} className="runButtonText">
-            Run
-          </h5>
-        </div>
+  const renderBattleButtons = () => {
+    return (
+      <div>
+        <div className="battleButtonsWrapper">
+          <div className="attackButtonWrapper">
+            <h5 onClick={() => beginAttack()} className="attackButtonText">
+              Attack
+            </h5>
+          </div>
+          <div className="runButtonWrapper">
+            <h5 onClick={() => handleRunButton()} className="runButtonText">
+              Run
+            </h5>
+          </div>
 
-        <div>
-          {isRunDisplayed && renderRun()}
-          {isPlayerWonInitiativeVisible && renderPlayerWonInitiative()}
-          {isEnemyWonInitiativeVisible && renderEnemyWonInitiative()}
-          {/* {isEnemyWonInitativeDisplayed && renderInitiative()} */} */}
+          <div>
+            {isRunDisplayed && renderRun()}
+            {isPlayerWonInitiativeVisible && renderPlayerWonInitiative()}
+            {isEnemyWonInitiativeVisible && renderEnemyWonInitiative()}
+            {/* {isEnemyWonInitativeDisplayed && renderInitiative()} */} */}
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
-
-
+    );
+  };
 
   return (
     <React.Fragment>
-      {battleTextDisplayed && renderBattleButtons()}
+      {battleEmo && renderBattleButtons()}
     </React.Fragment>
   );
 };
 
-export default Battle;
+export default BattleNewApproach;

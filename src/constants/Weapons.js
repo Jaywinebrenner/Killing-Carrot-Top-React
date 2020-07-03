@@ -29,7 +29,7 @@ export let WEAPONS = [
   {
     id: 3,
     name: "Broken 2x4",
-    damageString: "1-10",
+    damageString: "1-6",
     damage: 10,
     weaponHealth: 2,
     weaponPickUp:

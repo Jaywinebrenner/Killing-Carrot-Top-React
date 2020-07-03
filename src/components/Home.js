@@ -1,17 +1,16 @@
 import React, {useState, useEffect} from "react";
 import { AREAONE } from "../constants/Story";
 import carrotTop from "../media/carrot-top.png";
+import emo from "../media/emo.jpg";
 import Stats from './Stats'
 import { WEAPONS } from "../constants/Weapons";
-import Battle from './Battle'
+import Battle from './Battle';
+import {fourSidedDie, twoSidedDie, threeSidedDie, sixSidedDie} from '../constants/Dice';
 
 
 const Home = () => {
 
-
-
   // RENDER BOOLEANS
-
   const [name, setName] = useState(null)
   const [hitPoints, setHitPoints] = useState(20)
   const [damage, setDamage] = useState(1);
@@ -19,6 +18,18 @@ const Home = () => {
   const [weapon, setWeapon] = useState("Bare Hands");
   const [damageString, setDamageString] = useState("1-2")
   const [battleTextDisplayed, setBattleTextDisplayed] = useState(false)
+  const [isEmoImageVisible, setIsEmoImageVisible] = useState(false)
+  
+  
+  
+
+
+  //Image display stuff
+  const renderEmoImage = (imageName) => {
+    return (
+      <img className="emo" src={emo} />
+    )
+  }
 
 
 
@@ -54,25 +65,25 @@ const submitName = () => {
 
   const handleSetButterKnife = () => {
     setWeapon(WEAPONS[1].name)
-    setDamage(WEAPONS[1].damage)
+    setDamage(4)
     setDamageString(WEAPONS[1].damageString)
     setIsWeaponsChoiceButtonDisplayed(true)
   }
   const handleSetTrashCanLid = () => {
     setWeapon(WEAPONS[2].name);
-    setDamage(WEAPONS[2].damage);
+    setDamage(3);
     setDamageString(WEAPONS[2].damageString);
      setIsWeaponsChoiceButtonDisplayed(true);
   };
   const handleSetTwoByFour = () => {
     setWeapon(WEAPONS[3].name);
-    setDamage(WEAPONS[3].damage);
+    setDamage(6);
     setDamageString(WEAPONS[3].damageString);
      setIsWeaponsChoiceButtonDisplayed(true);
   };
   const handleTakeNothing = () => {
     setWeapon(WEAPONS[0].name);
-    setDamage(WEAPONS[0].damage);
+    setDamage(2);
     setDamageString(WEAPONS[0].damageString);
      setIsWeaponsChoiceButtonDisplayed(true);
   };
@@ -203,7 +214,7 @@ const submitName = () => {
           </h3>
           <div className="answerGridWrapper">
             <div className="answerGridOne" id="butterKnifeSelection">
-              <h5 onClick={handleAreaOneThree}>1 - Quietly slink by the ramshacked tent and continue forth to Prop Tower</h5>
+              <h5 onClick={handleAreaOneThree}>1 - Quietly slink by the ramshacked tent and continue forth to Ha Ha Tower</h5>
             </div>
   
             <div className="answerGridTwo">
@@ -243,12 +254,15 @@ const submitName = () => {
     const handleAreaOneFour = () => {
       setIsAreaOneDisplayed(false);
       setIsAreaOneFourDisplayed(true);
+      setIsEmoImageVisible(true);
+      
     };
     const renderAreaOneFour = () => {
+  
       return (
         <div>
           <h3>{AREAONE.four}</h3>
-          <div onClick={console.log("to do - begin battle with Emo Philips")} className="continueButtonWrapper">
+          <div onClick={()=> {setBattleTextDisplayed(true); setIsAreaOneFourDisplayed(false)}} className="continueButtonWrapper">
             <h3 className="continueButtonText">CONTINUE</h3>
           </div>
         </div>
@@ -316,24 +330,10 @@ const submitName = () => {
 
         <div className="statColTwo">
           <h2 className="battleHeaderText">Battle Text</h2>
-          <Battle
-            hitPoints={hitPoints}
-            setHitPoints={setHitPoints}
-            damage={damage}
-            setDamage={setDamage}
-            weapon={weapon}
-            setWeapon={setWeapon}
-            name={name}
-            setName={setName}
-            defence={defence}
-            setDefence={setDefence}
-            battleTextDisplayed={battleTextDisplayed}
-            setBattleTextDisplayed={setBattleTextDisplayed}
-          />
         </div>
 
         <div className="statColThree">
-          <h1>Pictures Here</h1>
+          {isEmoImageVisible && renderEmoImage()}
         </div>
       </div>
 
@@ -347,6 +347,22 @@ const submitName = () => {
         {isAreaOneFourDisplayed && renderAreaOneFour()}
         {isAreaOneFiveDisplayed && renderAreaOneFive()}
         {isAreaOneSixDisplayed && renderAreaOneSix()}
+        <Battle
+          hitPoints={hitPoints}
+          setHitPoints={setHitPoints}
+          damage={damage}
+          setDamage={setDamage}
+          weapon={weapon}
+          setWeapon={setWeapon}
+          name={name}
+          setName={setName}
+          defence={defence}
+          setDefence={setDefence}
+          battleTextDisplayed={battleTextDisplayed}
+          setBattleTextDisplayed={setBattleTextDisplayed}
+          // isPlayerWoneInitiativeVisible={isPlayerWoneInitiativeVisible}
+          // setIsPlayerWonInitiativeVisible={setIsPlayerWonInitiativeVisible}
+        />
       </div>
       {/* <div className="carrotTopImageHomeWraper">
         <img className="carrotTopImageHome" src={carrotTop} />
