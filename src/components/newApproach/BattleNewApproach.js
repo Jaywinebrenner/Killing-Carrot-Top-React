@@ -1,3 +1,5 @@
+// WORKING BATTLE REF
+
 import React, { useState, useEffect } from "react";
 import { emoPhilips, timAllen, judyTenuda } from "../../constants/Monsters";
 import { Redirect } from "react-router-dom";
@@ -5,6 +7,8 @@ import { RUN } from "../../constants/Story";
 import { twentySidedDie } from "../../constants/Dice";
 
 // Need to figure out Double damage, importing enemies upon BattleNewApproach
+
+  let initiativeRoll = null;
 
 const BattleNewApproach = ({
   hitPoints,
@@ -19,11 +23,12 @@ const BattleNewApproach = ({
   setDefence,
   battleTextDisplayed,
   setBattleTextDisplayed,
-  battleEmo
+  battleEmo,
 }) => {
   const [enemyHitPoints, setEnemyHitPoints] = useState(null);
   const [enemyDamage, setEnemyDamage] = useState(null);
   const [enemyDefence, setEnemyDefence] = useState(null);
+  // const [initiativeRoll, setInitiativeRoll] = useState(null);
 
   const [
     isPlayerWonInitiativeVisible,
@@ -34,12 +39,29 @@ const BattleNewApproach = ({
     setIsEnemyWonInitiativeVisible,
   ] = useState(false);
 
-  //  const togglePlayerWonInitiative = () => {
-  //        setIsPlayerWonInitiativeVisible(!isPlayerWonInitiativeVisible);
-  //  }
+  // INITIATIVE RENDERS
 
-  // let emoPhilipsHitPoints = setEnemyHitPoints(emoPhilips.hitPoints);
-  // console.log("EMO INITAL HPS", emoPhilipsHitPoints);
+  const renderPlayerWonInitiative = (initiativeRoll) => {
+    return (
+      <div>
+        <h5 className="battleText">The initiative roll is {initiativeRoll}</h5>;
+        <h5 className="battleText">
+          You have won intiiative and attack the foul creature
+        </h5>
+        ;
+      </div>
+    );
+  };
+
+  const renderEnemyWonInitiative = (initiativeRoll) => {
+    return (
+      <div>
+        <h5 className="battleText">The initiative roll is {initiativeRoll}</h5>;
+        <h5 className="battleText">Your foe has won initiative and attacks!</h5>
+        ;
+      </div>
+    );
+  };
 
   console.log("Emo Philips has this many Hit Points", enemyHitPoints);
   console.log("You have this many Hit Points", hitPoints);
@@ -50,46 +72,55 @@ const BattleNewApproach = ({
     const loadEmo = () => {
       setEnemyHitPoints(emoPhilips.hitPoints);
     };
+
     loadEmo();
   }, []);
 
   const [isRunDisplayed, setIsRunDisplayed] = useState(false);
 
-  let initiativeRoll = null;
+  // INITIATIVE
+
+
   const beginAttack = () => {
+    initiativeRoll = Math.floor(Math.random() * 20) + 1;
+
     setIsPlayerWonInitiativeVisible(false);
     setIsEnemyWonInitiativeVisible(false);
-
-    let twentySidedDie = Math.floor(Math.random() * 20) + 1;
-    if (twentySidedDie >= 5) {
-      console.log("INITIATIVE ROLL= ", twentySidedDie);
+    if (initiativeRoll >= 5) {
+      console.log("INITIATIVE ROLL= ", initiativeRoll);
       console.log("You have won intiiative and attack the foul createure");
       playerAttack();
       enemyAttack();
       setIsPlayerWonInitiativeVisible(true);
+      return (
+        <div>
+          <h5>The initiative roll is {initiativeRoll}</h5>
+          <h5>You have won intiiative and attack the foul createure</h5>
+        </div>
+      );
     } else {
-      console.log("INITIATIVE ROLL= ", twentySidedDie);
+      console.log("INITIATIVE ROLL= ", initiativeRoll);
       console.log("Your Foe has won intiiative and attacks you");
       enemyAttack();
       playerAttack();
       setIsEnemyWonInitiativeVisible(true);
     }
-    // return (
-    //   <div>
-    //     <h5>The initiative roll is {twentySidedDie}</h5>
-    //     <h5>You have won intiiative and attack the foul createure</h5>
-    //   </div>
-    // );
+    return initiativeRoll;
   };
 
+  console.log("INITIVE ROLL IN BODY", initiativeRoll);
+
+  let playerAttackRoll = null;
+  console.log("player attack roll in body", playerAttackRoll);
+
   const playerAttack = () => {
-    let twentySidedDie = Math.floor(Math.random() * 20) + 1;
-    console.log("PLAYER ATTACK ROLL ________", twentySidedDie);
-    if (twentySidedDie === 20) {
+    let playerAttackRoll = Math.floor(Math.random() * 20) + 1;
+    console.log("PLAYER ATTACK ROLL ________", playerAttackRoll);
+    if (playerAttackRoll === 20) {
       doubleDamageVsEnemy();
       return;
     }
-    if (twentySidedDie >= emoPhilips.defence) {
+    if (playerAttackRoll >= emoPhilips.defence) {
       console.log("EMOS HP BEFORE ATTACK", enemyHitPoints);
       setEnemyHitPoints(enemyHitPoints - damage);
       console.log("YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE", damage);
@@ -175,28 +206,6 @@ const BattleNewApproach = ({
     return <h5>{RUN[Math.floor(Math.random() * RUN.length)]}</h5>;
   };
 
-  const renderPlayerWonInitiative = () => {
-    return (
-      <div>
-        <h5 className="battleText">The initiative roll is {twentySidedDie}</h5>;
-        <h5 className="battleText">
-          You have won intiiative and attack the foul creature
-        </h5>
-        ;
-      </div>
-    );
-  };
-
-  const renderEnemyWonInitiative = (twentySidedDie) => {
-    return (
-      <div>
-        <h5 className="battleText">The initiative roll is {twentySidedDie}</h5>;
-        <h5 className="battleText">Your foe has won initiative and attacks!</h5>
-        ;
-      </div>
-    );
-  };
-
   const renderBattleButtons = () => {
     return (
       <div>
@@ -214,20 +223,17 @@ const BattleNewApproach = ({
 
           <div>
             {isRunDisplayed && renderRun()}
-            {isPlayerWonInitiativeVisible && renderPlayerWonInitiative()}
-            {isEnemyWonInitiativeVisible && renderEnemyWonInitiative()}
-            {/* {isEnemyWonInitativeDisplayed && renderInitiative()} */} */}
+            {isPlayerWonInitiativeVisible &&
+              renderPlayerWonInitiative(initiativeRoll)}
+            {isEnemyWonInitiativeVisible &&
+              renderEnemyWonInitiative(initiativeRoll)}
           </div>
         </div>
       </div>
     );
   };
 
-  return (
-    <React.Fragment>
-      {battleEmo && renderBattleButtons()}
-    </React.Fragment>
-  );
+  return <React.Fragment>{battleEmo && renderBattleButtons()}</React.Fragment>;
 };
 
 export default BattleNewApproach;

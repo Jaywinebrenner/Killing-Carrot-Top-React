@@ -21,16 +21,33 @@ const Game = () => {
   const [damage, setDamage] = useState(1);
   const [defence, setDefence] = useState(5)
   const [weapon, setWeapon] = useState("Bare Hands");
-  const [damageString, setDamageString] = useState("1-2")
-  const [battleTextDisplayed, setBattleTextDisplayed] = useState(false)
-  const [isEmoImageVisible, setIsEmoImageVisible] = useState(false)
-  const [armor, setArmor] = useState("Naked")
+  const [damageString, setDamageString] = useState("1-2");
+  const [battleTextDisplayed, setBattleTextDisplayed] = useState(false);
+  const [isEmoImageVisible, setIsEmoImageVisible] = useState(false);
+  const [armor, setArmor] = useState("Naked");
   const [chapterOne, setChapterOne] = useState(false);
-  const [battleEmo, setBattleEmo] = useState(false)
+  const [battleEmo, setBattleEmo] = useState(false);
+  const [battleButtonsOn, setBattleButtonsOn] = useState(false);
+  const [playerInitiativeVisible, setPlayerInitiativeVisible] = useState(false);
 
 
-console.log("name", name);
+console.log("emo image visible??", isEmoImageVisible);
 
+// Render Image Stuff
+  const renderEmoImage = (imageName) => {
+    return <img className="emo" src={emo} />;
+  };
+
+ const renderEmemyBlurb = () => {
+    return (
+      <div>
+        <h2 className="battleHeaderText">
+          You stand face to face with the Lilth Menace himself... 
+        </h2>
+        <h1>Emo Philips</h1>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -58,11 +75,11 @@ console.log("name", name);
           </div>
 
           <div className="statColTwo">
-            <h2 className="battleHeaderText">Battle Text</h2>
+            {isEmoImageVisible && renderEmemyBlurb()}
           </div>
 
           <div className="statColThree">
-            {/* {isEmoImageVisible && renderEmoImage()} */}
+            {isEmoImageVisible && renderEmoImage()}
           </div>
         </div>
 
@@ -86,25 +103,32 @@ console.log("name", name);
             chapterOne={chapterOne}
             setChapterOne={setChapterOne}
           />
-          {chapterOne && <ChapterOne armor={armor} battleEmo={battleEmo} setBattleEmo={setBattleEmo} />}
-          {battleEmo 
-          && 
-          <BattleNewApproach
-            hitPoints={hitPoints}
-            setHitPoints={setHitPoints}
-            damage={damage}
-            setDamage={setDamage}
-            weapon={weapon}
-            setWeapon={setWeapon}
-            name={name}
-            setName={setName}
-            defence={defence}
-            setDefence={setDefence}
-            setBattleEmo={setBattleEmo}
-            battleEmo={battleEmo}
-            // isPlayerWoneInitiativeVisible={isPlayerWoneInitiativeVisible}
-            // setIsPlayerWonInitiativeVisible={setIsPlayerWonInitiativeVisible}
-          /> }
+          {chapterOne && (
+            <ChapterOne
+              armor={armor}
+              battleEmo={battleEmo}
+              setBattleEmo={setBattleEmo}
+              setIsEmoImageVisible={setIsEmoImageVisible}
+            />
+          )}
+          {battleEmo && (
+            <BattleNewApproach
+              hitPoints={hitPoints}
+              setHitPoints={setHitPoints}
+              damage={damage}
+              setDamage={setDamage}
+              weapon={weapon}
+              setWeapon={setWeapon}
+              name={name}
+              setName={setName}
+              defence={defence}
+              setDefence={setDefence}
+              setBattleEmo={setBattleEmo}
+              battleEmo={battleEmo}
+              playerInitiativeVisible={playerInitiativeVisible}
+              setPlayerInitiativeVisible={setPlayerInitiativeVisible}
+            />
+          )}
         </div>
       </div>
     </div>
