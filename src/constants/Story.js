@@ -33,14 +33,14 @@ export let AREAONE = {
 
 export let DEAD = [
   
-   "The sky darkens to an unfathomable black as blood rains from the sky in thick torrents. Skeletal hands burst from the earth. The wailing of hungry children and screaming lambs trumpet from near to far. Humanities fate is doomed to enslavement via the Illuimiati of Laughter. They have  won. They reign supreme over all of humanity. For you...are dead. ",
-   "You fucking DIED!",
-   "You vision blurs and your voice gurgles with blood. You slump down to one knee and realize... you are going to die."
+   "The sky darkens to an unfathomable black as blood rains in thick torrents. Skeletal hands burst from the earth. The wailing of hungry children and screaming lambs trumpet from near to far. Humanities fate is doomed to enslavement via the Illuimiati of Laughter. They have  won. They reign supreme over all of humanity. For you...",
+   "You...",
+   "Your vision blurs and your voice gurgles wet with blood. You slump down to one knee, numbness overtaking your body. You try to move but are unable. You feel your very life slip you from your body. You..."
 ]
 
 export let RUN = [
   
-    "The sky darkens to an unfathomable black as blood rains from the sky in thick torrents. Skeletal hands burst from the earth.wailing of hungry children and screaming lambs trumpet from near to far. Humanities fate is doomed to enslavement via the Illuimiati of Laughter. They have won. Their supreme reign over all of humanity is now complete. For you...Are a coward.",
+    "The sky darkens to an unfathomable black as blood rains from the sky in thick torrents. Skeletal hands burst from the earth. The wailing of hungry children and screaming lambs trumpet from near to far. Humanities fate is doomed to enslavement via the Illuimiati of Laughter. They have won. Their supreme reign over all of humanity is now complete. For you...Are a coward.",
 
     "As you turn to flee your enemy- you legs lock up, unable to move. You skin slowly begins to alter it's color to that of a sickly yellow. Humanities fate is doomed to enslavement via the Illuimiati of Laughter. They have won. Their supreme reign over all of humanity is now complete. For you...Are a coward.",
 

@@ -30,6 +30,10 @@ const Game = () => {
   const [battleButtonsOn, setBattleButtonsOn] = useState(false);
   const [playerInitiativeVisible, setPlayerInitiativeVisible] = useState(false);
 
+  const [enemyHitPoints, setEnemyHitPoints] = useState(null);
+  const [enemyDamage, setEnemyDamage] = useState(null);
+  const [enemyDefence, setEnemyDefence] = useState(null);
+
 
 console.log("emo image visible??", isEmoImageVisible);
 
@@ -45,6 +49,7 @@ console.log("emo image visible??", isEmoImageVisible);
           You stand face to face with the Lilth Menace himself... 
         </h2>
         <h1>Emo Philips</h1>
+        <h5>Hit Points: {enemyHitPoints}</h5>
       </div>
     );
   }
@@ -127,6 +132,13 @@ console.log("emo image visible??", isEmoImageVisible);
               battleEmo={battleEmo}
               playerInitiativeVisible={playerInitiativeVisible}
               setPlayerInitiativeVisible={setPlayerInitiativeVisible}
+
+              enemyHitPoints={enemyHitPoints}
+              setEnemyHitPoints={setEnemyHitPoints}
+              enemyDamage={enemyDamage}
+              setEnemyDamage={setEnemyDamage}
+              enemyDefence={enemyDefence}
+              setEnemyDefence={setEnemyDefence}
             />
           )}
         </div>
@@ -136,3 +148,4 @@ console.log("emo image visible??", isEmoImageVisible);
 }
 
 export default Game
+

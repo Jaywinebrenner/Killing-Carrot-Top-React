@@ -132,7 +132,6 @@ line-height: 3px;
   height: 40px;
   margin: 0 auto;
   margin-top: 80px;
-
 }
 
 .continueButtonText{
@@ -239,4 +238,34 @@ margin: 0;
 
 .attackText {
   margin-top: 0;
+}
+
+.deadWrapper{
+  padding: 20px;
+ text-align: center;
+ border: 5px double white;
+width: 1000px;
+height: 700px;
+margin: 0 auto;
+margin-top: 30px;
+ background-image: url(./media/blood_pix.png);
+}
+
+.deadText{
+  font-size: 40px;
+}
+
+.areDeadText {
+  font-size: 80px;
+}
+
+.tryAgainButtonWrapper{
+ text-align: center;
+ font-size: 30px;
+  border: double white;
+  width: 190px;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 80px;
+
 }

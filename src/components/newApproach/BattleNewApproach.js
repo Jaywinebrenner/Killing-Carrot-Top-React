@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { emoPhilips, timAllen, judyTenuda } from "../../constants/Monsters";
-import { Redirect } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import { RUN } from "../../constants/Story";
 import { twentySidedDie } from "../../constants/Dice";
 
@@ -27,31 +27,53 @@ const BattleNewApproach = ({
   battleTextDisplayed,
   setBattleTextDisplayed,
   battleEmo,
+  enemyHitPoints,
+  setEnemyHitPoints,
+  enemyDamage,
+  setEnemyDamage,
+  enemyDefence,
+  setEnemyDefence,
 }) => {
-  const [enemyHitPoints, setEnemyHitPoints] = useState(null);
-  const [enemyDamage, setEnemyDamage] = useState(null);
-  const [enemyDefence, setEnemyDefence] = useState(null);
+  // const [enemyHitPoints, setEnemyHitPoints] = useState(null);
+  // const [enemyDamage, setEnemyDamage] = useState(null);
+  // const [enemyDefence, setEnemyDefence] = useState(null);
 
-  const [isPlayerWonInitiativeVisible, setIsPlayerWonInitiativeVisible] = useState(false);
-  const [isEnemyWonInitiativeVisible, setIsEnemyWonInitiativeVisible] = useState(false);
+  const [
+    isPlayerWonInitiativeVisible,
+    setIsPlayerWonInitiativeVisible,
+  ] = useState(false);
+  const [
+    isEnemyWonInitiativeVisible,
+    setIsEnemyWonInitiativeVisible,
+  ] = useState(false);
   const [isPlayerAttackVisible, setIsPlayerAttackVisible] = useState(false);
   const [isEnemyAttackVisible, setIsEnemyAttackVisible] = useState(false);
   const [playerMissed, setPlayerMissed] = useState(false);
   const [enemyMissed, setEnemyMissed] = useState(false);
   const [isDoubleDamageVsPlayer, setIsDoubleDamageVsPlayer] = useState(false);
-    const [IsDoubleDamageVsEnemy, setIsDoubleDamageVsEnemy] = useState(false);
+  const [IsDoubleDamageVsEnemy, setIsDoubleDamageVsEnemy] = useState(false);
+  const [isRunVisible, setIsRunVisible] = useState(false)
+  const [battleButtonsVisible, setBattleButtonsVisible] = useState(true)
+  const [isPlayerDead, setIsPlayerDead] = useState(true)
+    const [isEnemyDead, setIsEnemyDead] = useState(true);
 
+    useEffect(() => {
+      const loadEmo = () => {
+        setEnemyHitPoints(emoPhilips.hitPoints);
+      };
+
+      loadEmo();
+    }, []);
 
   //RENDER TO DOM
-
-
-
   const renderPlayerWonInitiative = (initiativeRoll) => {
-       console.log("INITAITVE ROLLLLLL", initiativeRoll);
+    console.log("INITAITVE ROLLLLLL", initiativeRoll);
     return (
       <React.Fragment>
         <h5 className="initiativeRoll">INITIATIVE ROLL - {initiativeRoll}</h5>
-        <h5 className="initiativeText">You have won intiiative and attack the foul creature</h5>
+        <h5 className="initiativeText">
+          You have won intiiative and attack the foul creature
+        </h5>
       </React.Fragment>
     );
   };
@@ -76,19 +98,19 @@ const BattleNewApproach = ({
         </h5>
       </React.Fragment>
     );
-  }
+  };
 
-    const renderEnemyAttack = (enemyAttackRoll) => {
-      return (
-        <React.Fragment>
-          <h5 className="attackRoll">ENEMY ATTACK ROLL - {enemyAttackRoll}</h5>
-          <h5 className="attackText">
-            A virulent blow across your face sprays a fine mist of blood into
-            the air for {emoPhilips.damage}
-          </h5>
-        </React.Fragment>
-      );
-    };
+  const renderEnemyAttack = (enemyAttackRoll) => {
+    return (
+      <React.Fragment>
+        <h5 className="attackRoll">ENEMY ATTACK ROLL - {enemyAttackRoll}</h5>
+        <h5 className="attackText">
+          A virulent blow across your face sprays a fine mist of blood into the
+          air for {emoPhilips.damage}
+        </h5>
+      </React.Fragment>
+    );
+  };
 
   const renderEnemyMissed = (enemyAttackRoll) => {
     return (
@@ -100,80 +122,73 @@ const BattleNewApproach = ({
       </React.Fragment>
     );
   };
-    const renderPlayerMissed = (playerAttackRoll) => {
-      return (
-        <React.Fragment>
-          <h5 className="attackRoll">
-            YOUR ATTACK ROLL (miss)- {playerAttackRoll}
-          </h5>
-          <h5 className="attackText">
-            You rolled a {playerAttackRoll}, swing and wildly miss.
-          </h5>
-        </React.Fragment>
-      );
-    };
+  const renderPlayerMissed = (playerAttackRoll) => {
+    return (
+      <React.Fragment>
+        <h5 className="attackRoll">
+          YOUR ATTACK ROLL - {playerAttackRoll}
+        </h5>
+        <h5 className="attackText">
+          You swing wildly and miss!
+        </h5>
+      </React.Fragment>
+    );
+  };
 
-    const renderDoubleDamageVsPlayer = (
-      enemyAttackRoll,
-      doubleDamageVsPlayerAmount,
-    ) => {
-      console.log("DOULBE DAMAE", doubleDamageVsPlayerAmount);
-      
-      return (
-        <React.Fragment>
-          <h5 className="attackRoll">
-            PLAYER ATTACK ROLL - {enemyAttackRoll}
-          </h5>
-          <h5 className="attackText">
-            YOU ROLLED A 20 AND UNLEASH A DEEP BELLOWING HOWL AS YOU TRASH YOUR
-            FOE FOR DOUBLE DAMAGE! Your foe suffers {doubleDamageVsPlayerAmount}
-          </h5>
-        </React.Fragment>
-      );
-    };
+  const renderDoubleDamageVsPlayer = (
+    enemyAttackRoll,
+    doubleDamageVsPlayerAmount,
+  ) => {
+    console.log("DOULBE DAMAE", doubleDamageVsPlayerAmount);
 
-        const renderDoubleDamageVsEnemy = (
-          playerAttackRoll,
-          doubleDamageVsPlayerAmount,
-        ) => {
-          console.log("DOULBE DAMAE", doubleDamageVsEnemyAmount);
+    return (
+      <React.Fragment>
+        <h5 className="attackRoll">PLAYER ATTACK ROLL - {enemyAttackRoll}</h5>
+        <h5 className="attackText">
+          YOU ROLLED A 20 AND UNLEASH A DEEP BELLOWING HOWL AS YOU TRASH YOUR
+          FOE FOR DOUBLE DAMAGE! Your foe suffers {doubleDamageVsPlayerAmount}
+        </h5>
+      </React.Fragment>
+    );
+  };
 
-          return (
-            <React.Fragment>
-              <h5 className="attackRoll">
-                PLAYER ATTACK ROLL - {playerAttackRoll}
-              </h5>
-              <h5 className="attackText">
-                YOU UNLEASH A VICTORIOUS HOWL AS YOU THRASH
-                YOUR FOE FOR DOUBLE DAMAGE! Your foe suffers
-                {doubleDamageVsPlayerAmount}
-              </h5>
-            </React.Fragment>
-          );
-        };
+  const renderDoubleDamageVsEnemy = (
+    playerAttackRoll,
+    doubleDamageVsPlayerAmount,
+  ) => {
+    console.log("DOULBE DAMAE", doubleDamageVsEnemyAmount);
 
-    
+    return (
+      <React.Fragment>
+        <h5 className="attackRoll">PLAYER ATTACK ROLL - {playerAttackRoll}</h5>
+        <h5 className="attackText">
+          You unleash a victorious howl as you thrash your foe for DOULBLE DAMAGE, suffering a loss of { doubleDamageVsPlayerAmount} hit points.
+        </h5>
+      </React.Fragment>
+    );
+  };
+
+  // const renderDead = () => {
+  //   return (
+  //     <React.Fragment>
+  //       <div className="homeWrapper">
+  //         <h5>{DEAD[Math.floor(Math.random() * DEAD.length)]}</h5>
+  //       </div>
+  //     </React.Fragment>
+  //   );
+  // };
 
   console.log("Emo Philips has this many Hit Points", enemyHitPoints);
   console.log("You have this many Hit Points", hitPoints);
   console.log("isPlayerWonInitiativeVisible", isPlayerWonInitiativeVisible);
   console.log("__________________________________________________");
 
-  useEffect(() => {
-    const loadEmo = () => {
-      setEnemyHitPoints(emoPhilips.hitPoints);
-    };
-
-    loadEmo();
-  }, []);
-
-  const [isRunDisplayed, setIsRunDisplayed] = useState(false);
 
   // INITIATIVE
   const beginAttack = () => {
     initiativeRoll = Math.floor(Math.random() * 20) + 1;
-    setPlayerMissed(false)
-    setEnemyMissed(false)
+    setPlayerMissed(false);
+    setEnemyMissed(false);
     setIsPlayerWonInitiativeVisible(false);
     setIsEnemyWonInitiativeVisible(false);
     if (initiativeRoll >= 5) {
@@ -198,21 +213,19 @@ const BattleNewApproach = ({
     return initiativeRoll;
   };
 
- 
-// PLAYER ATTACK
+  // PLAYER ATTACK
 
   const playerAttack = () => {
     playerAttackRoll = Math.floor(Math.random() * 20) + 1;
-    setIsDoubleDamageVsEnemy(false)
-    setIsPlayerAttackVisible(false)
+    setIsDoubleDamageVsEnemy(false);
+    setIsPlayerAttackVisible(false);
     setPlayerMissed(false);
     console.log("PLAYER ATTACK ROLL ________", playerAttackRoll);
-    if (playerAttackRoll > 17) {
-       setIsDoubleDamageVsEnemy(true);
-       doubleDamageVsEnemy()
+    if (playerAttackRoll === 20 ) {
+      setIsDoubleDamageVsEnemy(true);
+      doubleDamageVsEnemy();
       return;
-    } 
-    else if (playerAttackRoll === 20) {
+    } else if (playerAttackRoll > emoPhilips.defence) {
       console.log("EMOS HP BEFORE ATTACK", enemyHitPoints);
       setEnemyHitPoints(enemyHitPoints - damage);
       console.log("YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE", damage);
@@ -220,27 +233,26 @@ const BattleNewApproach = ({
       //   "EMO PHILIPS HAS THIS MANY HIT POINTS LEFT",
       //   enemyHitPoints,
       // );
-      setIsPlayerAttackVisible(true)
+      setIsPlayerAttackVisible(true);
       isEnemyDeadCheck();
     } else {
-      setPlayerMissed(true)
+      setPlayerMissed(true);
       console.log("YOU SWING AT YOUR FOE AND MISS HORRIBLY");
     }
     return playerAttackRoll;
   };
 
-  //ENEMY ATTACK 
+  //ENEMY ATTACK
 
   const enemyAttack = () => {
     enemyAttackRoll = Math.floor(Math.random() * 20) + 1;
-        setIsDoubleDamageVsPlayer(false);
-        setIsEnemyAttackVisible(false);
-        setEnemyMissed(false);
+    setIsDoubleDamageVsPlayer(false);
+    setIsEnemyAttackVisible(false);
+    setEnemyMissed(false);
     if (enemyAttackRoll === 20) {
       doubleDamageVsPlayer();
       return;
-    }
-    else if (enemyAttackRoll >= defence) {
+    } else if (enemyAttackRoll >= defence) {
       console.log("your foe attacks you with a roll of", enemyAttackRoll);
       setHitPoints((hitPoints -= emoPhilips.damage));
       console.log("and hits you for: ", emoPhilips.damage);
@@ -248,15 +260,23 @@ const BattleNewApproach = ({
       setIsEnemyAttackVisible(true);
       isPlayerDeadCheck();
     } else {
-      setEnemyMissed(true)
+      setEnemyMissed(true);
       console.log("YOUR FOE HAS SWUNG AND MISSED YOU");
     }
-   return enemyAttackRoll;
+    return enemyAttackRoll;
   };
 
   const isPlayerDeadCheck = () => {
     if (hitPoints <= 0) {
-      console.log("YOU HAVE DIED!!!");
+      // setIsPlayerDead(true)
+      return (
+        <Redirect
+          to={{
+            pathname: "/Dead",
+          }}
+        />
+      );
+
     }
   };
 
@@ -287,7 +307,7 @@ const BattleNewApproach = ({
 
   let doubleDamageVsPlayerAmount = null;
   const doubleDamageVsPlayer = () => {
-     setIsDoubleDamageVsPlayer(true);
+    setIsDoubleDamageVsPlayer(true);
     console.log(
       "YOUR FOE ROLLED A 20 AND SINKS HIS WEAPON DEEP INTO YOUR CHEST FOR DOUBLE DAMAGE",
     );
@@ -304,65 +324,23 @@ const BattleNewApproach = ({
   };
 
   const handleRunButton = () => {
-    setIsRunDisplayed(true);
+    setIsRunVisible(true);
   };
 
   const renderRun = () => {
+    setBattleButtonsVisible(false)
+    // setIsDoubleDamageVsPlayer(false);
+    // setIsEnemyAttackVisible(false);
+    // setEnemyMissed(false);
+    // setIsDoubleDamageVsEnemy(false);
+    // setIsPlayerAttackVisible(false);
+    // setPlayerMissed(false);
     return <h5>{RUN[Math.floor(Math.random() * RUN.length)]}</h5>;
   };
 
-  const renderEntireAttackRound = () => {
-    return (
-      <React.Fragment>
-        <div>
-          {/* {console.log("player attack roll in attack RENDER", playerAttackRoll)} */}
-
-          {isRunDisplayed && renderRun()}
-
-          {/* INITIATIVE */}
-          {isPlayerWonInitiativeVisible &&
-            renderPlayerWonInitiative(initiativeRoll)}
-          {isEnemyWonInitiativeVisible &&
-            renderEnemyWonInitiative(initiativeRoll)}
-
-          {/* FIRST ROUND ATTACK */}
-          {isPlayerAttackVisible && isPlayerWonInitiativeVisible ? (
-            renderPlayerAttack(playerAttackRoll)
-          ) : (
-            <React.Fragment></React.Fragment>
-          )}
-          {isEnemyAttackVisible && isEnemyWonInitiativeVisible ? (
-            renderEnemyAttack(enemyAttackRoll)
-          ) : (
-            <React.Fragment></React.Fragment>
-          )}
-          {isEnemyAttackVisible && enemyMissed ? (
-            renderEnemyMissed(enemyAttackRoll)
-          ) : (
-            <React.Fragment></React.Fragment>
-          )}
-          {playerMissed ? (
-            renderPlayerMissed(playerAttackRoll)
-          ) : (
-            <React.Fragment></React.Fragment>
-          )}
-          {console.log("is enemy attack visible?", isEnemyAttackVisible)}
-          {console.log("is enemy missed true?", enemyMissed)}
-          {console.log("is player attack visible?", isPlayerAttackVisible)}
-          {console.log("is plaery missed true?", playerMissed)}
-        </div>
-        <div>
-          {/* {isEnemyWonInitiativeVisible & enemyMissed && renderEnemyMissed()}
-          {isPlayerAttackVisible & isPlayerWonInitiativeVisible &&
-            renderPlayerAttack(playerAttackRoll)}
-            {isEnemyAttackVisible & isEnemyWonInitiativeVisible &&
-            renderEnemyAttack(enemyAttackRoll)} */}
-        </div>
-      </React.Fragment>
-    );
-  };
 
   const renderBattleIfPlayerWonInitiative = () => {
+    
     if (isPlayerWonInitiativeVisible) {
       return (
         <React.Fragment>
@@ -374,22 +352,10 @@ const BattleNewApproach = ({
               playerAttackRoll,
               doubleDamageVsEnemyAmount,
             )}
-          {/* {renderPlayerWonInitiative(initiativeRoll)}
-          {playerMissed
-            ? renderPlayerMissed(playerAttackRoll)
-            : renderPlayerAttack(playerAttackRoll)}
-          {IsDoubleDamageVsEnemy
-            ? renderDoubleDamageVsEnemy(
-                playerAttackRoll,
-                doubleDamageVsEnemyAmount,
-              )
-            : <React.Fragment></React.Fragment>} */}
         </React.Fragment>
       );
     }
-  }
-
-
+  };
 
   const renderBattleButtons = () => {
     return (
@@ -407,24 +373,21 @@ const BattleNewApproach = ({
           </div>
 
           <div>
-           { renderBattleIfPlayerWonInitiative()}
-            {/* {renderEntireAttackRound()} */}
-            {/* {isRunDisplayed && renderRun()};
-            {isPlayerWonInitiativeVisible &&
-              renderPlayerWonInitiative(initiativeRoll)}
-            {isEnemyWonInitiativeVisible &&
-              renderEnemyWonInitiative(initiativeRoll)} */}
-            {/* {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll)}
-            {isEnemyAttackVisible && renderEnemyAttack(enemyAttackRoll)}
-            {playerMissed && renderPlayerMissed(playerAttackRoll)}
-            {enemyMissed && renderEnemyMissed(enemyAttackRoll)} */}
+            {isRunVisible && renderRun()}
+            {renderBattleIfPlayerWonInitiative()}
+            {isPlayerDead && isPlayerDeadCheck()}
           </div>
         </div>
       </div>
     );
   };
 
-  return <React.Fragment>{battleEmo && renderBattleButtons()}</React.Fragment>;
+  return <React.Fragment>
+
+    {(battleEmo & battleButtonsVisible) && renderBattleButtons()}
+
+    
+    </React.Fragment>;
 };
 
 export default BattleNewApproach;
