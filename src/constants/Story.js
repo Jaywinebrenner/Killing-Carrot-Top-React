@@ -1,7 +1,7 @@
 
 export let INTRO = {
   one:
-    "Spawned from the fetid and pestulent comedy clubs from the dark edges of civilization, you embark on your journey to exact revenge upon this foul world from which you suffered so.",
+    "Spawned from the fetid and pestulent comedy clubs from the dark edges of a collapsed civilization, you embark on your journey to exact revenge upon this foul world from which you suffered so.",
   two:
     "Your singular journey is to infiltrate the elite comedy circuit of the Illuimiati of Laughter- a sinisiter coalition of comedians hell bent on the enslavement of the human race, world dominance and crushing the dignity of the human spirit.",
   three:

@@ -212,11 +212,6 @@ margin-bottom: 20px;
   margin: 0 0 5 0;;
 }
 
-.battleText{
-  margin: 0;
-  line-height: 0;
-}
-
 .emo{
   width: 250px;
 }
@@ -224,4 +219,24 @@ margin-bottom: 20px;
 .testText{
   font-size: 30px;
   color: white;
+}
+
+.playerAttackWrapper{
+  /* margin-top: 20px; */
+}
+
+.initiativeRoll{
+  margin: 0;
+}
+
+.initiativeText{
+margin: 0;
+}
+
+.attackRoll{
+  margin-bottom: 0;
+}
+
+.attackText {
+  margin-top: 0;
 }

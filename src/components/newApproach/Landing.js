@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import { INTRO } from "../constants/Story";
-import { AREAONE } from "../constants/Story";
-import carrotTop from "../media/carrot-top.png";
+import { INTRO } from "../../constants/Story";
+import { AREAONE } from "../../constants/Story";
+import carrotTop from "../../media/carrot-top.png";
 import { Link } from "react-router-dom";
 
 const Landing = () => {

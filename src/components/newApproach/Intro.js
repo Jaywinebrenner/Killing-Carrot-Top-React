@@ -1,6 +1,6 @@
 import React from "react";
-import { INTRO } from "../constants/Story";
-import carrotTop from '../media/carrot-top.png'
+import { INTRO } from "../../constants/Story";
+import carrotTop from '../../media/carrot-top.png'
 import { Link } from "react-router-dom";
 
 
