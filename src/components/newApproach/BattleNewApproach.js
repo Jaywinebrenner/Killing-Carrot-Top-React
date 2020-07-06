@@ -1,5 +1,3 @@
-// WORKING BATTLE REF
-
 import React, { useState, useEffect } from "react";
 import { emoPhilips, timAllen, judyTenuda } from "../../constants/Monsters";
 import { Redirect, Route } from "react-router-dom";
@@ -8,6 +6,7 @@ import { twentySidedDie } from "../../constants/Dice";
 
 // Need to figure out Double damage, importing enemies upon BattleNewApproach
 
+ 
   let initiativeRoll = null;
   let playerAttackRoll = null;
   let enemyAttackRoll = null;
@@ -168,16 +167,6 @@ const BattleNewApproach = ({
     );
   };
 
-  // const renderDead = () => {
-  //   return (
-  //     <React.Fragment>
-  //       <div className="homeWrapper">
-  //         <h5>{DEAD[Math.floor(Math.random() * DEAD.length)]}</h5>
-  //       </div>
-  //     </React.Fragment>
-  //   );
-  // };
-
   console.log("Emo Philips has this many Hit Points", enemyHitPoints);
   console.log("You have this many Hit Points", hitPoints);
   console.log("isPlayerWonInitiativeVisible", isPlayerWonInitiativeVisible);
@@ -268,7 +257,6 @@ const BattleNewApproach = ({
 
   const isPlayerDeadCheck = () => {
     if (hitPoints <= 0) {
-      // setIsPlayerDead(true)
       return (
         <Redirect
           to={{
@@ -276,15 +264,20 @@ const BattleNewApproach = ({
           }}
         />
       );
-
     }
   };
 
-  const isEnemyDeadCheck = () => {
-    if (emoPhilips.hitPoints <= 0) {
-      console.log("YOU HAVE DEFEATED YOUR FOE!!!");
-    }
-  };
+    const isEnemyDeadCheck = () => {
+        if (enemyHitPoints <= 0) {
+          return (
+            <Redirect
+              to={{
+                pathname: "/BattleVictory",
+              }}
+            />
+          );
+        }
+    };
 
   //DOUBLE DAMAGE
 
@@ -323,24 +316,24 @@ const BattleNewApproach = ({
     );
   };
 
+  //RUN
+
   const handleRunButton = () => {
     setIsRunVisible(true);
   };
 
-  const renderRun = () => {
-    setBattleButtonsVisible(false)
-    // setIsDoubleDamageVsPlayer(false);
-    // setIsEnemyAttackVisible(false);
-    // setEnemyMissed(false);
-    // setIsDoubleDamageVsEnemy(false);
-    // setIsPlayerAttackVisible(false);
-    // setPlayerMissed(false);
-    return <h5>{RUN[Math.floor(Math.random() * RUN.length)]}</h5>;
-  };
-
+    const renderRun = () => {
+        return (
+          <Redirect
+            to={{
+              pathname: "/Run"
+            }}
+          />
+        )
+    };
 
   const renderBattleIfPlayerWonInitiative = () => {
-    
+    {isRunVisible && renderRun()}
     if (isPlayerWonInitiativeVisible) {
       return (
         <React.Fragment>
@@ -352,10 +345,48 @@ const BattleNewApproach = ({
               playerAttackRoll,
               doubleDamageVsEnemyAmount,
             )}
+
+          {enemyMissed && renderEnemyMissed(enemyAttackRoll)}
+          {isEnemyAttackVisible && renderEnemyAttack(enemyAttackRoll)}
+          {isDoubleDamageVsPlayer &&
+            renderDoubleDamageVsPlayer(
+              enemyAttackRoll,
+              doubleDamageVsPlayerAmount,
+            )}
         </React.Fragment>
       );
     }
   };
+
+    const renderBattleIfEnemyWonInitiative = () => {
+      {isRunVisible && renderRun()}
+      if (isPlayerWonInitiativeVisible) {
+        return (
+          <React.Fragment>
+            {enemyMissed && renderEnemyMissed(enemyAttackRoll)}
+            {isEnemyAttackVisible && renderEnemyAttack(enemyAttackRoll)}
+            {isDoubleDamageVsPlayer &&
+              renderDoubleDamageVsPlayer(
+                enemyAttackRoll,
+                doubleDamageVsPlayerAmount,
+              )}
+
+            {renderPlayerWonInitiative(initiativeRoll)}
+            {playerMissed && renderPlayerMissed(playerAttackRoll)}
+            {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll)}
+            {IsDoubleDamageVsEnemy &&
+              renderDoubleDamageVsEnemy(
+                playerAttackRoll,
+                doubleDamageVsEnemyAmount,
+              )}
+          </React.Fragment>
+        );
+      }
+    };
+
+
+
+
 
   const renderBattleButtons = () => {
     return (
@@ -374,8 +405,11 @@ const BattleNewApproach = ({
 
           <div>
             {isRunVisible && renderRun()}
-            {renderBattleIfPlayerWonInitiative()}
-            {isPlayerDead && isPlayerDeadCheck()}
+            {isPlayerDeadCheck()}
+            {/* {isEnemyDeadCheck()} */}
+            {isPlayerWonInitiativeVisible &&
+              renderBattleIfPlayerWonInitiative()}
+            {isEnemyWonInitiativeVisible && renderBattleIfEnemyWonInitiative()}
           </div>
         </div>
       </div>

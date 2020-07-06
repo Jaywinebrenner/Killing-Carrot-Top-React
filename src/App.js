@@ -7,6 +7,8 @@ import Dead from "./components/newApproach/Dead";
 import Home from "./x-unusedComponents/Home";
 import {BrowserRouter as Router, Switch, Link, Route } from "react-router-dom"
 import Game from "./components/newApproach/Game"
+import Run from "./components/newApproach/Run";
+import BattleVictory from "./components/newApproach/BattleVictory";
 
 
 
@@ -18,6 +20,8 @@ function App() {
         <Route path="/Intro" exact={true} component={Intro} />
         <Route path="/Game" exact={true} component={Game} />
         <Route path="/Dead" exact={true} component={Dead} />
+        <Route path="/Run" exact={true} component={Run} />
+        <Route path="/BattleVictory" exact={true} component={BattleVictory} />
         <Game />
       </Switch>
     </Router>

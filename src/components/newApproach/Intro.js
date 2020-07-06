@@ -9,24 +9,21 @@ const Intro = () => {
 const renderIntroText = () => {
   return (
     <div>
+      <h1 className="introHeader">CHAPTER ONE</h1>
       <h3 className="storyText">{INTRO.one}</h3>
       <h3 className="storyText">{INTRO.two}</h3>
       <h3 className="storyText">{INTRO.three}</h3>
-      <Link style={{ textDecoration: "none" }} to="/Home">
-        <h1 className="header">CONTINUE</h1>
+      <Link style={{ textDecoration: "none" }} to="/Game">
+        <h1 className="landingContinueButton">CONTINUE</h1>
       </Link>
     </div>
   );
 };
 
     return (
-      <div className="introWrapper">
-        <h1 className="headerText">KILLING CARROT TOP</h1>
+      <div className="deadWrapper">
         <div className="introTextWrapper"> {renderIntroText()} </div>
-
-        <div className="carrotTopImageIntroWraper">
-          <img className="carrotTopImageIntro" src={carrotTop} />
-        </div>
+        <img className="carrotTopImageIntroTwo" src={carrotTop} />
       </div>
     );
 }

@@ -30,6 +30,5 @@ const pressStartGame = () => {
 
 export default Landing;
 
-// headerText;
 
 

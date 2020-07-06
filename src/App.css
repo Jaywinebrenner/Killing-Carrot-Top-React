@@ -15,12 +15,28 @@
   padding-top: 8px;
 }
 
+.landingContinueButton{
+  margin-top: 100px;
+  letter-spacing: 2px;
+ font-size: 20px;
+}
+
 .startGameButtonText {
   letter-spacing: 2px;
   margin-top: 0;
  font-size: 20px;
  margin-right: 800px;
 
+}
+
+.introHeader {
+    font-family: 'Metal Mania', cursive;
+     font-size: 58px;
+      letter-spacing: 12px;
+}
+
+.carrotTopImageIntroTwo{
+  width: 270px;
 }
 
 .headerText{

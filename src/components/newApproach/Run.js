@@ -1,19 +1,19 @@
-import { DEAD } from "../../constants/Story";
+import { RUN } from "../../constants/Story";
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 
-const Dead = ({isRunVisible}) => {
-  console.log("ruNN?", isRunVisible);
-  
-  const [pushedTryAgain, setPushTryAgain] = useState(false)
+const Run = () => {
+
+
+  const [pushedTryAgain, setPushTryAgain] = useState(false);
 
   return (
     <React.Fragment>
       <div className="deadWrapper">
         <h5 className="deadText">
-          {DEAD[Math.floor(Math.random() * DEAD.length)]}
+          {RUN[Math.floor(Math.random() * RUN.length)]}
         </h5>
-        <h1 className="areDeadText">ARE DEAD!</h1>
+        <h1 className="areDeadText">COWARD!</h1>
         <h1
           className="tryAgainButtonWrapper"
           onClick={() => setPushTryAgain(true)}
@@ -30,6 +30,6 @@ const Dead = ({isRunVisible}) => {
       </div>
     </React.Fragment>
   );
-}
+};
 
-export default Dead
+export default Run;
