@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { AREAONE } from "../../constants/Story";
-import Battle from '../Battle';
+
 
 
 

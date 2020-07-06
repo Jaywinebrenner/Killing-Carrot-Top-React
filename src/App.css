@@ -5,6 +5,24 @@
   text-align: center;
 }
 
+.landingHeader {
+  font-family: 'Metal Mania', cursive;
+  letter-spacing: 23px;
+  font-size: 28px;
+  color :#8a0303;
+  margin-top: 600px;
+  margin-right: 300px;
+  padding-top: 8px;
+}
+
+.startGameButtonText {
+  letter-spacing: 2px;
+  margin-top: 0;
+ font-size: 20px;
+ margin-right: 800px;
+
+}
+
 .headerText{
   font-family: 'Metal Mania', cursive;
   letter-spacing: 23px;
@@ -267,5 +285,4 @@ margin-top: 30px;
   height: 40px;
   margin: 0 auto;
   margin-top: 80px;
-
 }

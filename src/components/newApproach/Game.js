@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AREAONE } from "../../constants/Story";
 import carrotTop from "../../media/carrot-top.png";
 import emo from "../../media/emo.jpg";
-import Stats from "../Stats";
+import Stats from "./Stats";
 import { WEAPONS } from "../../constants/Weapons";
 import BattleNewApproach from "./BattleNewApproach";
 // import {

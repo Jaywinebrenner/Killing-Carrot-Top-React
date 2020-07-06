@@ -13,31 +13,23 @@ const pressStartGame = () => {
 }
 
   return (
-    <div
-      styles={{ backgroundImage: `url(${carrotTop})` }}
-      className="landingWrapper"
-    >
-      <h1
-        className="headerText">
-        KILLING CARROT TOP
-      </h1>
-      <Link style={{ textDecoration: "none" }} to="/Intro">
-        <h1
-          onClick={pressStartGame}
-          className="header">
+    <div className="deadWrapper">
+      <h1 className="landingHeader">KILLING CARROT TOP</h1>
+      <Link 
+      style={{ 
+        textDecoration: "none",
+
+        }} to="/Intro">
+        <h1 onClick={pressStartGame} className="startGameButtonText">
           START GAME
         </h1>
       </Link>
-
-      {startGame ? (
-        <img className="landingCarrotTopImage" src={carrotTop} />
-      ) : (
-        <h1></h1>
-      )}
     </div>
   );
 };
 
 export default Landing;
+
+// headerText;
 
 

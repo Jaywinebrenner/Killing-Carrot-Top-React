@@ -33,8 +33,8 @@ export let AREAONE = {
 
 export let DEAD = [
   
-   "The sky darkens to an unfathomable black as blood rains in thick torrents. Skeletal hands burst from the earth. The wailing of hungry children and screaming lambs trumpet from near to far. Humanities fate is doomed to enslavement via the Illuimiati of Laughter. They have  won. They reign supreme over all of humanity. For you...",
-   "You...",
+   "The sky darkens to an unfathomable black as blood rains down in thick torrents. Skeletal hands burst from the earth. The wailing of hungry children and screaming lambs trumpet from near to far. Humanities fate is doomed to annihilation via the Illuimiati of Laughter. They have  won. They now reign supreme over all living things. For you...",
+
    "Your vision blurs and your voice gurgles wet with blood. You slump down to one knee, numbness overtaking your body. You try to move but are unable. You feel your very life slip you from your body. You..."
 ]
 
