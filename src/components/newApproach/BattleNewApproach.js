@@ -223,11 +223,11 @@ const BattleNewApproach = ({
       //   enemyHitPoints,
       // );
       setIsPlayerAttackVisible(true);
-      isEnemyDeadCheck();
     } else {
       setPlayerMissed(true);
       console.log("YOU SWING AT YOUR FOE AND MISS HORRIBLY");
     }
+    isEnemyDeadCheck();
     return playerAttackRoll;
   };
 
@@ -267,8 +267,11 @@ const BattleNewApproach = ({
     }
   };
 
+  console.log("enemy hit points in IN BODY?",enemyHitPoints )
+  
     const isEnemyDeadCheck = () => {
-        if (enemyHitPoints <= 0) {
+  console.log("enemy hit points in IN CHECK?", enemyHitPoints);
+        if (enemyHitPoints < 1) {
           return (
             <Redirect
               to={{
@@ -360,7 +363,7 @@ const BattleNewApproach = ({
 
     const renderBattleIfEnemyWonInitiative = () => {
       {isRunVisible && renderRun()}
-      if (isPlayerWonInitiativeVisible) {
+      if (isEnemyWonInitiativeVisible) {
         return (
           <React.Fragment>
             {enemyMissed && renderEnemyMissed(enemyAttackRoll)}
@@ -406,7 +409,9 @@ const BattleNewApproach = ({
           <div>
             {isRunVisible && renderRun()}
             {isPlayerDeadCheck()}
-            {/* {isEnemyDeadCheck()} */}
+
+            {enemyHitPoints && isEnemyDeadCheck()}
+
             {isPlayerWonInitiativeVisible &&
               renderBattleIfPlayerWonInitiative()}
             {isEnemyWonInitiativeVisible && renderBattleIfEnemyWonInitiative()}

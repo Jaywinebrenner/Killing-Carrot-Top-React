@@ -42,7 +42,7 @@ export let RUN = [
   
     "The sky darkens to an unfathomable black as blood rains from the sky in thick torrents. Skeletal hands burst from the earth. The wailing of hungry children and screaming lambs trumpet from near to far. Humanities fate is doomed to enslavement via the Illuimiati of Laughter. They have won. Their supreme reign over all is now complete. For you are a ...",
 
-    "As you turn to flee your enemy- you legs lock up, unable to move. You skin slowly begins to alter it's color to that of a sickly yellow. Humanities fate is doomed to enslavement via the Illuimiati of Laughter. They have won. Their supreme reign over all of humanity is now complete. For you are a ... .",
+    "As you turn to flee your enemy- you legs lock up, unable to move. Your skin slowly begins to mutate it's color to that of a sickly, vomitous yellow. Humanities fate is doomed to enslavement via the Illuimiati of Laughter. They have won. Their supreme reign over all of humanity is now complete. For you are a ... .",
 
     "As you turn to flee your foe, you clumsily trip over crack on the ground. Your face slams the ground with wet slap. Your vision grows page as you feel your foe climb on your back and end your life in some horrible, unseen way. You die know that you are a ... "
 ];

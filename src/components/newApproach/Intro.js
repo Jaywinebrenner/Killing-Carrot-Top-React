@@ -1,6 +1,6 @@
 import React from "react";
 import { INTRO } from "../../constants/Story";
-import carrotTop from '../../media/carrot-top.png'
+import carrotTop from '../../media/carrot-top-10.png'
 import { Link } from "react-router-dom";
 
 
@@ -9,7 +9,7 @@ const Intro = () => {
 const renderIntroText = () => {
   return (
     <div>
-      <h1 className="introHeader">CHAPTER ONE</h1>
+      <h1 className="introHeader">The Begining</h1>
       <h3 className="storyText">{INTRO.one}</h3>
       <h3 className="storyText">{INTRO.two}</h3>
       <h3 className="storyText">{INTRO.three}</h3>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AREAONE } from "../../constants/Story";
-import carrotTop from "../../media/carrot-top.png";
+import carrotTop from "../../media/carrot-top-10.png";
 import emo from "../../media/emo.jpg";
 import Stats from "./Stats";
 import { WEAPONS } from "../../constants/Weapons";
@@ -10,7 +10,7 @@ import BattleNewApproach from "./BattleNewApproach";
 //   twoSidedDie,
 //   threeSidedDie,
 //   sixSidedDie,
-// } from "../constants/Dice";
+// } from "../constants/Dice";carr
 import {CreateCharacter} from './CreateCharacter'
 import ChapterOne from './ChapterOne'
 
