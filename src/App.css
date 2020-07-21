@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Red+Rose&display=swap');
 
+h1, h2, h3, h4, h5, p {
+  color: white;
+  margin-bottom: 3;
+font-family: 'Red Rose', cursive;
+}
 
 .App {
   text-align: center;
@@ -35,6 +41,31 @@
       letter-spacing: 12px;
 }
 
+.Typewriter__cursor{
+   color: rgba(0, 0, 0, 0.0);
+}
+
+/* INTRO PAGE */
+
+.introWholeWrapper{
+  padding: 20px;
+  text-align: center;
+  border: 5px double white;
+  width: 1000px;
+  height: 700px;
+  margin: 0 auto;
+  margin-top: 30px;
+  background-image: url(./media/blood_pix.png);
+  }
+
+.introTextWrapper{
+height: 300px;
+}
+
+.introImageWrapper{
+
+}
+
 .carrotTopImageIntroTwo{
   width: 340px;
 }
@@ -45,8 +76,62 @@
   font-size: 48px;
   color :#8a0303;
   margin: 0;
-padding-top: 8px;
+  padding-top: 8px;
 }
+
+/* CREATE CHARACTER */
+
+.inputCursor i {
+    /* position: absolute;
+    width: 1px;
+    height: 80%;
+    background-color: gray;
+    left: 5px;
+    top: 10%;
+    animation-name: blink;
+    animation-duration: 800ms;
+    animation-iteration-count: infinite;
+    opacity: 1; */
+}
+        
+.submitNameInput {
+  background-color: black;
+  border-color: white;
+  border: "none";
+    color: white;
+      outline: 0;
+  border-width: 0 0 2px;
+
+}
+
+/* input.submitNameInput:focus {
+    outline-width: 0;
+}
+
+.inputCursor input:focus + i {
+    display: none;
+}
+
+@keyframes blink {
+    from { opacity: 1; }
+    to { opacity: 0; }
+} */
+
+
+.submitNameButtonWrapper{
+ text-align: center;
+ font-size: 30px;
+  border: double white;
+  width: 190px;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.submitNameButtonText{
+  margin-top: 0px;
+}
+/* __________________________________ */
 
 body {
   background: black;
@@ -56,10 +141,6 @@ body {
   padding: 2% 20%
 }
 
-h1, h2, h3, h4, h5, p {
-  color: white;
-  margin-bottom: 3;
-}
 
 .carrotTopImageIntroWraper {
 
@@ -84,11 +165,6 @@ h1, h2, h3, h4, h5, p {
  text-align: center;
 }
 
-.introTextWrapper {
-
-  /* border-radius: 5px;
-  border-color: 'white' */
-}
 
 .answerGridWrapper{
  display: grid;

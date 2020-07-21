@@ -37,23 +37,31 @@ export const CreateCharacter = ({
           //ONE
   const renderOne = () => {
   return (
-  <div>
-    <h3>What is thy name, Comedian Slayer?</h3>
-    <input
-      onChange={(event) => setName(event.target.value)}
-      value={name}
-    />
-    <button onClick={submitOne} type="button">
+    <div>
+      <h3>What is thy name, Comedian Slayer?</h3>
+      <div class="inputCursor">
+        <input
+          className="submitNameInput"
+          onChange={(event) => setName(event.target.value)}
+          value={name}
+          placeholder=""
+        />
+        <i></i>
+      </div>
+      {/* <button onClick={submitOne} type="button">
       Submit
-    </button>
-  </div>
+    </button> */}
+      <div className="submitNameButtonWrapper" onClick={submitOne}>
+        <h3 className="submitNameButtonText">Submit</h3>
+      </div>
+    </div>
   );
   };
 
   const submitOne = () => {
-  setName(name);
-  setIsOneVisible(false);
-  setIsTwoVisible(true);
+    setName(name);
+    setIsOneVisible(false);
+    setIsTwoVisible(true);
   };
 
   //TWO - Set Weapon

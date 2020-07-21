@@ -4,6 +4,7 @@ import { AREAONE } from "../../constants/Story";
 import carrotTop from "../../media/carrot-top.png";
 import { Link } from "react-router-dom";
 
+
 const Landing = () => {
 
 const [startGame, setStartGame] = useState(false)
