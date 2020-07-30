@@ -372,6 +372,7 @@ const BattleNewApproach = ({
     if (isEnemyWonInitiativeVisible) {
       return (
         <React.Fragment>
+          {renderEnemyWonInitiative(initiativeRoll)}
           {enemyMissed && renderEnemyMissed(enemyAttackRoll)}
           {isEnemyAttackVisible && renderEnemyAttack(enemyAttackRoll)}
           {isDoubleDamageVsPlayer &&
@@ -380,7 +381,7 @@ const BattleNewApproach = ({
               doubleDamageVsPlayerAmount,
             )}
 
-          {renderPlayerWonInitiative(initiativeRoll)}
+          {/* {renderPlayerWonInitiative(initiativeRoll)} */}
           {playerMissed && renderPlayerMissed(playerAttackRoll)}
           {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll)}
           {IsDoubleDamageVsEnemy &&

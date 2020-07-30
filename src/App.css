@@ -226,7 +226,7 @@ text-align: left;
 
 .statColThree{
     text-align: center;
-  border-right: 5px double white;
+  /* border-right: 5px double white; */
   padding-right: 0;
 }
 
