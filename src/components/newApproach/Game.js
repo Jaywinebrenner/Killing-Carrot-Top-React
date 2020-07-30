@@ -15,6 +15,8 @@ import {CreateCharacter} from './CreateCharacter'
 import ChapterOne from './ChapterOne'
 import gamePlay from "../../media/gameplay.mp3";
 import battle from "../../media/battle.mp3";
+// import victory from "../../media/victory.mp3";
+// import death from "../../media/death.mp3";
 import ReactHowler from "react-howler";
 
 
@@ -69,9 +71,31 @@ console.log("emo image visible??", isEmoImageVisible);
     const turnOnBattleMusic = () => {
       setIsBattleMusicPlaying(true);
     };
-        const turnOffBattleMusic = () => {
-          setIsBattleMusicPlaying(false);
-        };
+    const turnOffBattleMusic = () => {
+      setIsBattleMusicPlaying(false);
+    };
+
+    const [isVictoryMusicPlaying, setIsVictoryMusicPlaying] = useState(false)
+
+    const turnOnVictoryMusic = () => {
+      setIsVictoryMusicPlaying(true);
+    };
+
+    const turnOffVictoryMusic = () => {
+      setIsVictoryMusicPlaying(true);
+    };
+
+    const [isDeathMusicPlaying, setIsDeathMusicPlaying] = useState(
+      false,
+    );
+
+    const turnOnDeathMusic = () => {
+      setIsDeathMusicPlaying(true);
+    };
+
+    const turnOffDeathMusic = () => {
+      setIsDeathMusicPlaying(true);
+    };
 
   return (
     <div>
@@ -179,6 +203,18 @@ console.log("emo image visible??", isEmoImageVisible);
         loop={true}
         playing={isBattleMusicPlaying}
       />
+      {/* <ReactHowler
+        src={victory}
+        volume={0.3}
+        loop={true}
+        playing={isVictoryMusicPlaying}
+      />
+      <ReactHowler
+        src={death}
+        volume={0.3}
+        loop={true}
+        playing={isDeathMusicPlaying}
+      /> */}
     </div>
   );
 }
