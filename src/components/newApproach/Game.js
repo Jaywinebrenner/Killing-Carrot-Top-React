@@ -13,6 +13,9 @@ import BattleNewApproach from "./BattleNewApproach";
 // } from "../constants/Dice";carr
 import {CreateCharacter} from './CreateCharacter'
 import ChapterOne from './ChapterOne'
+import gamePlay from "../../media/gameplay.mp3";
+import battle from "../../media/battle.mp3";
+import ReactHowler from "react-howler";
 
 
 const Game = () => {
@@ -54,6 +57,22 @@ console.log("emo image visible??", isEmoImageVisible);
     );
   }
 
+  // MUSIC
+  const [isGameMusicPlaying, setIsGameMusicPlaying] = useState(true);
+
+  const turnOffGamePlayMusic = () => {
+      setIsGameMusicPlaying(false)
+      }
+
+    const [isBattleMusicPlaying, setIsBattleMusicPlaying] = useState(false);
+
+    const turnOnBattleMusic = () => {
+      setIsBattleMusicPlaying(true);
+    };
+        const turnOffBattleMusic = () => {
+          setIsBattleMusicPlaying(false);
+        };
+
   return (
     <div>
       <div className="homeWrapper">
@@ -91,6 +110,9 @@ console.log("emo image visible??", isEmoImageVisible);
         <div className="gameWindowWrapper">
           {" "}
           <CreateCharacter
+            turnOnBattleMusic={turnOnBattleMusic}
+            turnOffGamePlayMusic={isGameMusicPlaying}
+            setIsGameMusicPlaying={setIsGameMusicPlaying}
             name={name}
             setName={setName}
             hitPoints={hitPoints}
@@ -118,6 +140,9 @@ console.log("emo image visible??", isEmoImageVisible);
           )}
           {battleEmo && (
             <BattleNewApproach
+              isGameMusicPlaying={isGameMusicPlaying}
+              turnOnBattleMusic={turnOnBattleMusic}
+              turnOffGamePlayMusic={turnOffGamePlayMusic}
               hitPoints={hitPoints}
               setHitPoints={setHitPoints}
               damage={damage}
@@ -132,7 +157,6 @@ console.log("emo image visible??", isEmoImageVisible);
               battleEmo={battleEmo}
               playerInitiativeVisible={playerInitiativeVisible}
               setPlayerInitiativeVisible={setPlayerInitiativeVisible}
-
               enemyHitPoints={enemyHitPoints}
               setEnemyHitPoints={setEnemyHitPoints}
               enemyDamage={enemyDamage}
@@ -143,6 +167,18 @@ console.log("emo image visible??", isEmoImageVisible);
           )}
         </div>
       </div>
+      <ReactHowler
+        src={gamePlay}
+        volume={0.4}
+        loop={true}
+        playing={isGameMusicPlaying}
+      />
+      <ReactHowler
+        src={battle}
+        volume={0.3}
+        loop={true}
+        playing={isBattleMusicPlaying}
+      />
     </div>
   );
 }

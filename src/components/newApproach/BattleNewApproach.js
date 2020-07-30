@@ -32,6 +32,9 @@ const BattleNewApproach = ({
   setEnemyDamage,
   enemyDefence,
   setEnemyDefence,
+  turnOffGamePlayMusic,
+  turnOnBattleMusic,
+  isGameMusicPlaying
 }) => {
   // const [enemyHitPoints, setEnemyHitPoints] = useState(null);
   // const [enemyDamage, setEnemyDamage] = useState(null);
@@ -51,18 +54,18 @@ const BattleNewApproach = ({
   const [enemyMissed, setEnemyMissed] = useState(false);
   const [isDoubleDamageVsPlayer, setIsDoubleDamageVsPlayer] = useState(false);
   const [IsDoubleDamageVsEnemy, setIsDoubleDamageVsEnemy] = useState(false);
-  const [isRunVisible, setIsRunVisible] = useState(false)
-  const [battleButtonsVisible, setBattleButtonsVisible] = useState(true)
-  const [isPlayerDead, setIsPlayerDead] = useState(true)
-    const [isEnemyDead, setIsEnemyDead] = useState(true);
+  const [isRunVisible, setIsRunVisible] = useState(false);
+  const [battleButtonsVisible, setBattleButtonsVisible] = useState(true);
+  const [isPlayerDead, setIsPlayerDead] = useState(true);
+  const [isEnemyDead, setIsEnemyDead] = useState(true);
 
-    useEffect(() => {
-      const loadEmo = () => {
-        setEnemyHitPoints(emoPhilips.hitPoints);
-      };
+  useEffect(() => {
+    const loadEmo = () => {
+      setEnemyHitPoints(emoPhilips.hitPoints);
+    };
 
-      loadEmo();
-    }, []);
+    loadEmo();
+  }, []);
 
   //RENDER TO DOM
   const renderPlayerWonInitiative = (initiativeRoll) => {
@@ -124,12 +127,8 @@ const BattleNewApproach = ({
   const renderPlayerMissed = (playerAttackRoll) => {
     return (
       <React.Fragment>
-        <h5 className="attackRoll">
-          YOUR ATTACK ROLL - {playerAttackRoll}
-        </h5>
-        <h5 className="attackText">
-          You swing wildly and miss!
-        </h5>
+        <h5 className="attackRoll">YOUR ATTACK ROLL - {playerAttackRoll}</h5>
+        <h5 className="attackText">You swing wildly and miss!</h5>
       </React.Fragment>
     );
   };
@@ -161,7 +160,8 @@ const BattleNewApproach = ({
       <React.Fragment>
         <h5 className="attackRoll">PLAYER ATTACK ROLL - {playerAttackRoll}</h5>
         <h5 className="attackText">
-          You unleash a victorious howl as you thrash your foe for DOULBLE DAMAGE, suffering a loss of { doubleDamageVsPlayerAmount} hit points.
+          You unleash a victorious howl as you thrash your foe for DOULBLE
+          DAMAGE, suffering a loss of {doubleDamageVsPlayerAmount} hit points.
         </h5>
       </React.Fragment>
     );
@@ -171,10 +171,12 @@ const BattleNewApproach = ({
   console.log("You have this many Hit Points", hitPoints);
   console.log("isPlayerWonInitiativeVisible", isPlayerWonInitiativeVisible);
   console.log("__________________________________________________");
-
+  console.log("game play music",isGameMusicPlaying )
 
   // INITIATIVE
   const beginAttack = () => {
+    turnOnBattleMusic();
+    turnOffGamePlayMusic();
     initiativeRoll = Math.floor(Math.random() * 20) + 1;
     setPlayerMissed(false);
     setEnemyMissed(false);
@@ -210,7 +212,7 @@ const BattleNewApproach = ({
     setIsPlayerAttackVisible(false);
     setPlayerMissed(false);
     console.log("PLAYER ATTACK ROLL ________", playerAttackRoll);
-    if (playerAttackRoll === 20 ) {
+    if (playerAttackRoll === 20) {
       setIsDoubleDamageVsEnemy(true);
       doubleDamageVsEnemy();
       return;
@@ -267,20 +269,20 @@ const BattleNewApproach = ({
     }
   };
 
-  console.log("enemy hit points in IN BODY?",enemyHitPoints )
-  
-    const isEnemyDeadCheck = () => {
-  console.log("enemy hit points in IN CHECK?", enemyHitPoints);
-        if (enemyHitPoints < 1) {
-          return (
-            <Redirect
-              to={{
-                pathname: "/BattleVictory",
-              }}
-            />
-          );
-        }
-    };
+  console.log("enemy hit points in IN BODY?", enemyHitPoints);
+
+  const isEnemyDeadCheck = () => {
+    console.log("enemy hit points in IN CHECK?", enemyHitPoints);
+    if (enemyHitPoints < 1) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/BattleVictory",
+          }}
+        />
+      );
+    }
+  };
 
   //DOUBLE DAMAGE
 
@@ -325,18 +327,20 @@ const BattleNewApproach = ({
     setIsRunVisible(true);
   };
 
-    const renderRun = () => {
-        return (
-          <Redirect
-            to={{
-              pathname: "/Run"
-            }}
-          />
-        )
-    };
+  const renderRun = () => {
+    return (
+      <Redirect
+        to={{
+          pathname: "/Run",
+        }}
+      />
+    );
+  };
 
   const renderBattleIfPlayerWonInitiative = () => {
-    {isRunVisible && renderRun()}
+    {
+      isRunVisible && renderRun();
+    }
     if (isPlayerWonInitiativeVisible) {
       return (
         <React.Fragment>
@@ -361,35 +365,33 @@ const BattleNewApproach = ({
     }
   };
 
-    const renderBattleIfEnemyWonInitiative = () => {
-      {isRunVisible && renderRun()}
-      if (isEnemyWonInitiativeVisible) {
-        return (
-          <React.Fragment>
-            {enemyMissed && renderEnemyMissed(enemyAttackRoll)}
-            {isEnemyAttackVisible && renderEnemyAttack(enemyAttackRoll)}
-            {isDoubleDamageVsPlayer &&
-              renderDoubleDamageVsPlayer(
-                enemyAttackRoll,
-                doubleDamageVsPlayerAmount,
-              )}
+  const renderBattleIfEnemyWonInitiative = () => {
+    {
+      isRunVisible && renderRun();
+    }
+    if (isEnemyWonInitiativeVisible) {
+      return (
+        <React.Fragment>
+          {enemyMissed && renderEnemyMissed(enemyAttackRoll)}
+          {isEnemyAttackVisible && renderEnemyAttack(enemyAttackRoll)}
+          {isDoubleDamageVsPlayer &&
+            renderDoubleDamageVsPlayer(
+              enemyAttackRoll,
+              doubleDamageVsPlayerAmount,
+            )}
 
-            {renderPlayerWonInitiative(initiativeRoll)}
-            {playerMissed && renderPlayerMissed(playerAttackRoll)}
-            {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll)}
-            {IsDoubleDamageVsEnemy &&
-              renderDoubleDamageVsEnemy(
-                playerAttackRoll,
-                doubleDamageVsEnemyAmount,
-              )}
-          </React.Fragment>
-        );
-      }
-    };
-
-
-
-
+          {renderPlayerWonInitiative(initiativeRoll)}
+          {playerMissed && renderPlayerMissed(playerAttackRoll)}
+          {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll)}
+          {IsDoubleDamageVsEnemy &&
+            renderDoubleDamageVsEnemy(
+              playerAttackRoll,
+              doubleDamageVsEnemyAmount,
+            )}
+        </React.Fragment>
+      );
+    }
+  };
 
   const renderBattleButtons = () => {
     return (
@@ -421,12 +423,11 @@ const BattleNewApproach = ({
     );
   };
 
-  return <React.Fragment>
-
-    {(battleEmo & battleButtonsVisible) && renderBattleButtons()}
-
-    
-    </React.Fragment>;
+  return (
+    <React.Fragment>
+      {battleEmo & battleButtonsVisible && renderBattleButtons()}
+    </React.Fragment>
+  );
 };
 
 export default BattleNewApproach;
