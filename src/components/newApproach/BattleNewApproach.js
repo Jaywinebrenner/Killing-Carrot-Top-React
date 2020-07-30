@@ -3,7 +3,7 @@ import { emoPhilips, timAllen, judyTenuda } from "../../constants/Monsters";
 import { Redirect, Route } from "react-router-dom";
 import { RUN } from "../../constants/Story";
 import { twentySidedDie } from "../../constants/Dice";
-
+import Typewriter from "typewriter-effect";
 // Need to figure out Double damage, importing enemies upon BattleNewApproach
 
  
@@ -59,6 +59,7 @@ const BattleNewApproach = ({
   const [isPlayerDead, setIsPlayerDead] = useState(true);
   const [isEnemyDead, setIsEnemyDead] = useState(true);
 
+
   useEffect(() => {
     const loadEmo = () => {
       setEnemyHitPoints(emoPhilips.hitPoints);
@@ -72,6 +73,23 @@ const BattleNewApproach = ({
     console.log("INITAITVE ROLLLLLL", initiativeRoll);
     return (
       <React.Fragment>
+        {/* <Typewriter
+          className="initiativeRoll"
+          onInit={(typewriter) => {
+            typewriter.changeDelay(80).typeString("INITIATIVE ROLL - ").start();
+          }}
+        />
+        <Typewriter
+          className="initiativeText"
+          onInit={(typewriter) => {
+            typewriter
+              .changeDelay(80)
+              .typeString(
+                "You have won intiiative and attack the foul creature",
+              )
+              .start();
+          }}
+        /> */}
         <h5 className="initiativeRoll">INITIATIVE ROLL - {initiativeRoll}</h5>
         <h5 className="initiativeText">
           You have won intiiative and attack the foul creature
