@@ -40,7 +40,6 @@ const Game = () => {
   const [enemyDefence, setEnemyDefence] = useState(null);
 
 
-console.log("damage GAME.JS", damage);
 
 
 // Render Image Stuff

@@ -4,8 +4,8 @@ import { Redirect, Route } from "react-router-dom";
 import { RUN } from "../../constants/Story";
 import { twentySidedDie } from "../../constants/Dice";
 import Typewriter from "typewriter-effect";
-// Need to figure out Double damage, importing enemies upon BattleNewApproach
 
+// need to figure out how to print out playerAttackRange 
  
   let initiativeRoll = null;
   let playerAttackRoll = null;
@@ -223,8 +223,9 @@ const BattleNewApproach = ({
   };
 
   // PLAYER ATTACK
-  // setDamage()
+
 console.log("player damage-----------", damage)
+let playerAttackRange = Math.floor(Math.random() * damage) + 1;
   const playerAttack = () => {
     playerAttackRoll = Math.floor(Math.random() * 20) + 1;
     setIsDoubleDamageVsEnemy(false);
@@ -237,8 +238,11 @@ console.log("player damage-----------", damage)
       return;
     } else if (playerAttackRoll > emoPhilips.defence) {
       console.log("EMOS HP BEFORE ATTACK", enemyHitPoints);
-      setEnemyHitPoints(enemyHitPoints - damage);
-      console.log("YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE", damage);
+      setEnemyHitPoints(enemyHitPoints - playerAttackRange);
+      console.log(
+        "YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE",
+        playerAttackRange,
+      );
       // console.log(
       //   "EMO PHILIPS HAS THIS MANY HIT POINTS LEFT",
       //   enemyHitPoints,
