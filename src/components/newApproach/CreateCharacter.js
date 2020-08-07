@@ -126,6 +126,7 @@ export const CreateCharacter = ({
            setDamageString(WEAPONS[3].damageString);
            setIsTwoVisible(false);
            setIsWeaponChoiceTextVisible(true);
+  
          };
          const handleTakeNothing = () => {
            setWeapon(WEAPONS[0].name);
@@ -152,6 +153,7 @@ export const CreateCharacter = ({
                    onClick={() => {
                      setIsWeaponChoiceTextVisible(false);
                      setIsSetArmorVisible(true);
+                     
                    }}
                    className="beginThyAdventureButtonText"
                  >

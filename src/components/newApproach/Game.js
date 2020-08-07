@@ -23,7 +23,7 @@ import ReactHowler from "react-howler";
 const Game = () => {
   const [name, setName] = useState(null)
   const [hitPoints, setHitPoints] = useState(20)
-  const [damage, setDamage] = useState(1);
+  const [damage, setDamage] = useState(0);
   const [defence, setDefence] = useState(5)
   const [weapon, setWeapon] = useState("Bare Hands");
   const [damageString, setDamageString] = useState("1-2");
@@ -40,7 +40,8 @@ const Game = () => {
   const [enemyDefence, setEnemyDefence] = useState(null);
 
 
-console.log("emo image visible??", isEmoImageVisible);
+console.log("damage GAME.JS", damage);
+
 
 // Render Image Stuff
   const renderEmoImage = (imageName) => {
@@ -142,7 +143,7 @@ console.log("emo image visible??", isEmoImageVisible);
             hitPoints={hitPoints}
             setHitPoints={setHitPoints}
             damage={damage}
-            setDamage={setDamageString}
+            setDamage={setDamage}
             defence={defence}
             setDefence={setDefence}
             weapon={weapon}

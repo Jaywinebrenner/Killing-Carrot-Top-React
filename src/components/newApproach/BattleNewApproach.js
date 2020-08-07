@@ -223,7 +223,8 @@ const BattleNewApproach = ({
   };
 
   // PLAYER ATTACK
-
+  // setDamage()
+console.log("player damage-----------", damage)
   const playerAttack = () => {
     playerAttackRoll = Math.floor(Math.random() * 20) + 1;
     setIsDoubleDamageVsEnemy(false);
