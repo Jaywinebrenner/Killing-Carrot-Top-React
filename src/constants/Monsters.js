@@ -1,6 +1,6 @@
 export const emoPhilips = {
     name: "emoPhilips",
-    hitPoints: 10,
+    hitPoints: 30,
     damage: 2,
     defence: 3,
   };

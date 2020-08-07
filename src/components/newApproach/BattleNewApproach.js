@@ -5,6 +5,7 @@ import { RUN } from "../../constants/Story";
 import { twentySidedDie } from "../../constants/Dice";
 import Typewriter from "typewriter-effect";
 
+
 // need to figure out how to print out playerAttackRange 
  
   let initiativeRoll = null;
@@ -59,9 +60,18 @@ const BattleNewApproach = ({
   const [isPlayerDead, setIsPlayerDead] = useState(true);
   const [isEnemyDead, setIsEnemyDead] = useState(true);
 
+  const [playerAttackRange, setPlayerAttackRange] = useState(null);
+    const [enemyAttackRange, setEnemyAttackRange] = useState(null);
 
+  
   useEffect(() => {
     const loadEmo = () => {
+      setPlayerAttackRange(Math.floor(Math.random() * damage) + 1);
+      setEnemyAttackRange(
+        Math.floor(Math.random() * emoPhilips.damage) + 1,
+      );
+      // let playerAttackRange = Math.floor(Math.random() * damage) + 1;
+      //  let enemyAttackRange = Math.floor(Math.random() * emoPhilips.damage) + 1;
       setEnemyHitPoints(emoPhilips.hitPoints);
     };
 
@@ -108,13 +118,15 @@ const BattleNewApproach = ({
       </React.Fragment>
     );
   };
-
+  
+  console.log("playerattackRange LINE 120-----------", playerAttackRange);
   const renderPlayerAttack = (playerAttackRoll) => {
     return (
       <React.Fragment>
+      {console.log("playerattackRange LINE inside of renderPlayerAttack-----------", playerAttackRange)}
         <h5 className="attackRoll"> YOUR ATTACK ROLL - {playerAttackRoll}</h5>
         <h5 className="attackText">
-          You have thrashed your foe for {damage} damage!
+          You have thrashed your foe for {playerAttackRange} damage!
         </h5>
       </React.Fragment>
     );
@@ -126,7 +138,7 @@ const BattleNewApproach = ({
         <h5 className="attackRoll">ENEMY ATTACK ROLL - {enemyAttackRoll}</h5>
         <h5 className="attackText">
           A virulent blow across your face sprays a fine mist of blood into the
-          air for {emoPhilips.damage}
+          air for {enemyAttackRange} damage.
         </h5>
       </React.Fragment>
     );
@@ -155,14 +167,13 @@ const BattleNewApproach = ({
     enemyAttackRoll,
     doubleDamageVsPlayerAmount,
   ) => {
-    console.log("DOULBE DAMAE", doubleDamageVsPlayerAmount);
+    console.log("DOULBE DAMAGE vs PLAYER", doubleDamageVsPlayerAmount);
 
     return (
       <React.Fragment>
-        <h5 className="attackRoll">PLAYER ATTACK ROLL - {enemyAttackRoll}</h5>
+        <h5 className="attackRoll">ENEMY ATTACK ROLL - {enemyAttackRoll}</h5>
         <h5 className="attackText">
-          YOU ROLLED A 20 AND UNLEASH A DEEP BELLOWING HOWL AS YOU TRASH YOUR
-          FOE FOR DOUBLE DAMAGE! Your foe suffers {doubleDamageVsPlayerAmount}
+          YOUR FOE ROLLED A 20 AND RIPS A WET GAPING WOUND IN YOUR CHEST FOR DOUBLE DAMAGE! Blood paints the wall in Pollock-esque splatter as you suffer {doubleDamageVsPlayerAmount} damage.
         </h5>
       </React.Fragment>
     );
@@ -172,7 +183,7 @@ const BattleNewApproach = ({
     playerAttackRoll,
     doubleDamageVsPlayerAmount,
   ) => {
-    console.log("DOULBE DAMAE", doubleDamageVsEnemyAmount);
+    console.log("DOULBE DAMAGE vs ENEMY", doubleDamageVsEnemyAmount);
 
     return (
       <React.Fragment>
@@ -224,8 +235,8 @@ const BattleNewApproach = ({
 
   // PLAYER ATTACK
 
-console.log("player damage-----------", damage)
-let playerAttackRange = Math.floor(Math.random() * damage) + 1;
+
+  console.log("playerattackRange LINE 230-----------", playerAttackRange);
   const playerAttack = () => {
     playerAttackRoll = Math.floor(Math.random() * 20) + 1;
     setIsDoubleDamageVsEnemy(false);
@@ -263,13 +274,13 @@ let playerAttackRange = Math.floor(Math.random() * damage) + 1;
     setIsDoubleDamageVsPlayer(false);
     setIsEnemyAttackVisible(false);
     setEnemyMissed(false);
-    if (enemyAttackRoll === 20) {
+    if (enemyAttackRoll > 10) {
       doubleDamageVsPlayer();
       return;
     } else if (enemyAttackRoll >= defence) {
       console.log("your foe attacks you with a roll of", enemyAttackRoll);
-      setHitPoints((hitPoints -= emoPhilips.damage));
-      console.log("and hits you for: ", emoPhilips.damage);
+      setHitPoints((hitPoints -= enemyAttackRange));
+      console.log("and hits you for: ", enemyAttackRange);
       // console.log("You have THIS MANY HIT POINTS LEFT", hitPoints);
       setIsEnemyAttackVisible(true);
       isPlayerDeadCheck();
@@ -310,10 +321,10 @@ let playerAttackRange = Math.floor(Math.random() * damage) + 1;
   //DOUBLE DAMAGE
 
   const doubleDamageVsEnemy = () => {
-    if (damage === 1) {
+    if (playerAttackRange === 1) {
       doubleDamageVsEnemyAmount = 2;
     } else {
-      doubleDamageVsEnemyAmount = damage * 2;
+      doubleDamageVsEnemyAmount = playerAttackRange * 2;
     }
     console.log(
       "YOU ROLLED A 20 AND UNLEASH A DEEP BELLOWING HOWL AS YOU TRASH YOUR FOE FOR DOUBLE DAMAGE",
@@ -332,16 +343,17 @@ let playerAttackRange = Math.floor(Math.random() * damage) + 1;
     console.log(
       "YOUR FOE ROLLED A 20 AND SINKS HIS WEAPON DEEP INTO YOUR CHEST FOR DOUBLE DAMAGE",
     );
-    if (emoPhilips.damage === 1) {
+    if (enemyAttackRange === 1) {
       doubleDamageVsPlayerAmount = 2;
     } else {
-      doubleDamageVsPlayerAmount = emoPhilips.damage * 2;
+      doubleDamageVsPlayerAmount = enemyAttackRange * 2;
     }
-    setHitPoints((hitPoints -= doubleDamageVsPlayerAmount));
+    setHitPoints(hitPoints -= doubleDamageVsPlayerAmount);
     console.log(
       "YOUR FOE INFLICTS THIS MUCH DAMAGE:",
       doubleDamageVsPlayerAmount,
     );
+    return doubleDamageVsPlayerAmount;
   };
 
   //RUN

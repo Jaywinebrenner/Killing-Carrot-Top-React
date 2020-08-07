@@ -22,7 +22,7 @@ import ReactHowler from "react-howler";
 
 const Game = () => {
   const [name, setName] = useState(null)
-  const [hitPoints, setHitPoints] = useState(20)
+  const [hitPoints, setHitPoints] = useState(50)
   const [damage, setDamage] = useState(0);
   const [defence, setDefence] = useState(5)
   const [weapon, setWeapon] = useState("Bare Hands");
