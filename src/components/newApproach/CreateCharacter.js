@@ -34,6 +34,7 @@ export const CreateCharacter = ({
          toggleGamePlayMusic,
        }) => {
          const [isOneVisible, setIsOneVisible] = useState(true);
+         const [isNoNameEnteredVisible, setIsNoNameVisible] = useState(false);
 
 
         // useEffect(() => {
@@ -67,9 +68,15 @@ export const CreateCharacter = ({
          };
 
          const submitOne = () => {
-           setName(name);
-           setIsOneVisible(false);
-           setIsTwoVisible(true);
+           if (!name) {
+            setIsNoNameVisible(true);
+           } else {
+             setName(name);
+             setIsOneVisible(false);
+             setIsTwoVisible(true);
+             setIsNoNameVisible(false);
+
+           }
          };
 
          //TWO - Set Weapon
@@ -363,14 +370,22 @@ export const CreateCharacter = ({
            setIsArmorChoiceVisible(true);
          };
 
+         const renderNoNameVisible = () => {
+           return (
+             <h1>ENTER THY NAME, COMEDIAN SLAYER!</h1>
+           )
+         }
+
 
          return (
            <React.Fragment>
+             {/* {isOneVisible && name != '' ? renderOne : <h1>ENTER THY NAME!</h1>} */}
              {isOneVisible && renderOne()}
              {isTwoVisible && renderTwo()}
              {isWeaponChoiceTextVisible && renderPostWeaponChoiceText()}
              {isSetArmorVisible && renderSetArmor()}
              {isArmorChoiceVisible && renderArmorChoice()}
+             {isNoNameEnteredVisible && renderNoNameVisible()}
              {/* <ReactHowler
                src={gamePlay}
                volume={0.4}
