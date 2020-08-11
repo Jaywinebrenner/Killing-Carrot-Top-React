@@ -12,6 +12,7 @@ import Typewriter from "typewriter-effect";
   let playerAttackRoll = null;
   let enemyAttackRoll = null;
   let doubleDamageVsEnemyAmount = null;
+  let doubleDamageVsPlayerAmount = null;
     let playerAttackRange = null;
     let enemyAttackRange = null;
 
@@ -62,10 +63,7 @@ const BattleNewApproach = ({
   const [isPlayerDead, setIsPlayerDead] = useState(true);
   const [isEnemyDead, setIsEnemyDead] = useState(true);
 
-  // const [playerAttackRange, setPlayerAttackRange] = useState(null);
-  // const [enemyAttackRange, setEnemyAttackRange] = useState(null);
-
-  
+ 
   useEffect(() => {
     const loadEmo = () => {
 
@@ -77,6 +75,7 @@ const BattleNewApproach = ({
       // let playerAttackRange = Math.floor(Math.random() * damage) + 1;
       //  let enemyAttackRange = Math.floor(Math.random() * emoPhilips.damage) + 1;
       setEnemyHitPoints(emoPhilips.hitPoints);
+      console.log("USE EFFECT HIPS", enemyHitPoints);
     };
 
     loadEmo();
@@ -123,11 +122,11 @@ const BattleNewApproach = ({
     );
   };
   
-  console.log("************LINE 120", playerAttackRange);
+
   const renderPlayerAttack = (playerAttackRoll, playerAttackRange) => {
     return (
       <React.Fragment>
-        {console.log("****************", playerAttackRange)}
+
         <h5 className="attackRoll"> You have rolled a {playerAttackRoll}</h5>
         <h5 className="attackText">
           You have thrashed your foe for {playerAttackRange} damage!
@@ -185,7 +184,7 @@ const BattleNewApproach = ({
 
   const renderDoubleDamageVsEnemy = (
     playerAttackRoll,
-    doubleDamageVsPlayerAmount,
+    doubleDamageVsEnemyAmount,
   ) => {
     console.log("DOULBE DAMAGE vs ENEMY", doubleDamageVsEnemyAmount);
 
@@ -194,7 +193,7 @@ const BattleNewApproach = ({
         <h5 className="attackRoll">You have rolled a {playerAttackRoll}</h5>
         <h5 className="attackText">
           You unleash a victorious howl as you thrash your foe for DOULBLE
-          DAMAGE, suffering a loss of {doubleDamageVsPlayerAmount} hit points.
+          DAMAGE, suffering a loss of {doubleDamageVsEnemyAmount} hit points.
         </h5>
       </React.Fragment>
     );
@@ -217,6 +216,11 @@ const BattleNewApproach = ({
 
     playerAttackRange = Math.floor(Math.random() * emoPhilips.damage) + 1;
     enemyAttackRange = Math.floor(Math.random() * emoPhilips.damage) + 1;
+    // if (playerAttackRange === 1) {
+    //   doubleDamageVsEnemyAmount = 2
+    // } else {
+    //   doubleDamageVsEnemyAmount = playerAttackRange * 2;
+    // }
 
     setPlayerMissed(false);
     setEnemyMissed(false);
@@ -248,7 +252,6 @@ const BattleNewApproach = ({
   // PLAYER ATTACK
 
 
-  console.log("playerattackRange LINE 230-----------", playerAttackRange);
   const playerAttack = () => {
 
     playerAttackRoll = Math.floor(Math.random() * 20) + 1;
@@ -260,7 +263,7 @@ const BattleNewApproach = ({
     console.log("PLAYER ATTACK ROLL ________", playerAttackRoll);
     if (playerAttackRoll > 10) {
       setIsDoubleDamageVsEnemy(true);
-      doubleDamageVsEnemy();
+      doubleDamageVsEnemy(playerAttackRange);
       return;
     } else if (playerAttackRoll > emoPhilips.defence) {
       console.log("EMOS HP BEFORE ATTACK", enemyHitPoints);
@@ -276,7 +279,7 @@ const BattleNewApproach = ({
     }
     isEnemyDeadCheck();
     // return playerAttackRoll;
-    return playerAttackRange
+    return playerAttackRange;
   };
 
   //ENEMY ATTACK
@@ -287,7 +290,7 @@ const BattleNewApproach = ({
     setIsEnemyAttackVisible(false);
     setEnemyMissed(false);
     if (enemyAttackRoll > 10) {
-      doubleDamageVsPlayer();
+      doubleDamageVsPlayer(enemyAttackRange);
       return;
     } else if (enemyAttackRoll >= defence) {
       console.log("your foe attacks you with a roll of", enemyAttackRoll);
@@ -332,25 +335,44 @@ const BattleNewApproach = ({
 
   //DOUBLE DAMAGE
 
+ 
+
+
   const doubleDamageVsEnemy = (playerAttackRange) => {
-    if (playerAttackRange === 1) {
-      doubleDamageVsEnemyAmount = 2;
-    } else {
+    console.log("2222222- player attack range in", doubleDamageVsEnemyAmount);
+      console.log(
+        "22222- DoubleDamageAmount in DD",
+        doubleDamageVsEnemyAmount,
+      );
+      console.log("222222PLayer ATTACK RANGE in DD", playerAttackRange);
       doubleDamageVsEnemyAmount = playerAttackRange * 2;
-    }
+
+
+    // if (playerAttackRange === 1) {
+    //   doubleDamageVsEnemyAmount = 2;
+    // } else {
+    //   doubleDamageVsEnemyAmount = playerAttackRange * 2;
+    // }
     console.log(
-      "YOU ROLLED A 20 AND UNLEASH A DEEP BELLOWING HOWL AS YOU TRASH YOUR FOE FOR DOUBLE DAMAGE",
+      "YOU ROLLED A 20 AND UNLEASH A DEEP BELLOWING HOWL AS YOU TRASH YOUR FOE FOR DOUBLE DAMAGE", 
     );
+
+
+   
     setEnemyHitPoints(enemyHitPoints - doubleDamageVsEnemyAmount);
     console.log(
       "YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE",
       doubleDamageVsEnemyAmount,
     );
+      console.log(
+        "22222222- doubleDamageVsEnemyAmount",
+        doubleDamageVsEnemyAmount,
+      );
     return doubleDamageVsEnemyAmount;
   };
 
-  let doubleDamageVsPlayerAmount = null;
-  const doubleDamageVsPlayer = () => {
+
+  const doubleDamageVsPlayer = (enemyAttackRange) => {
     setIsDoubleDamageVsPlayer(true);
     console.log(
       "YOUR FOE ROLLED A 20 AND SINKS HIS WEAPON DEEP INTO YOUR CHEST FOR DOUBLE DAMAGE",
