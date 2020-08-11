@@ -12,6 +12,8 @@ import Typewriter from "typewriter-effect";
   let playerAttackRoll = null;
   let enemyAttackRoll = null;
   let doubleDamageVsEnemyAmount = null;
+    let playerAttackRange = null;
+    let enemyAttackRange = null;
 
 const BattleNewApproach = ({
   hitPoints,
@@ -60,16 +62,18 @@ const BattleNewApproach = ({
   const [isPlayerDead, setIsPlayerDead] = useState(true);
   const [isEnemyDead, setIsEnemyDead] = useState(true);
 
-  const [playerAttackRange, setPlayerAttackRange] = useState(null);
-    const [enemyAttackRange, setEnemyAttackRange] = useState(null);
+  // const [playerAttackRange, setPlayerAttackRange] = useState(null);
+  // const [enemyAttackRange, setEnemyAttackRange] = useState(null);
 
   
   useEffect(() => {
     const loadEmo = () => {
-      setPlayerAttackRange(Math.floor(Math.random() * damage) + 1);
-      setEnemyAttackRange(
-        Math.floor(Math.random() * emoPhilips.damage) + 1,
-      );
+
+      // setPlayerAttackRange(Math.floor(Math.random() * damage) + 1);
+      // setEnemyAttackRange(
+      //   Math.floor(Math.random() * emoPhilips.damage) + 1,
+      // );
+
       // let playerAttackRange = Math.floor(Math.random() * damage) + 1;
       //  let enemyAttackRange = Math.floor(Math.random() * emoPhilips.damage) + 1;
       setEnemyHitPoints(emoPhilips.hitPoints);
@@ -119,12 +123,12 @@ const BattleNewApproach = ({
     );
   };
   
-  console.log("playerattackRange LINE 120-----------", playerAttackRange);
-  const renderPlayerAttack = (playerAttackRoll) => {
+  console.log("************LINE 120", playerAttackRange);
+  const renderPlayerAttack = (playerAttackRoll, playerAttackRange) => {
     return (
       <React.Fragment>
-      {console.log("playerattackRange LINE inside of renderPlayerAttack-----------", playerAttackRange)}
-        <h5 className="attackRoll"> YOUR ATTACK ROLL - {playerAttackRoll}</h5>
+        {console.log("****************", playerAttackRange)}
+        <h5 className="attackRoll"> You have rolled a {playerAttackRoll}</h5>
         <h5 className="attackText">
           You have thrashed your foe for {playerAttackRange} damage!
         </h5>
@@ -135,7 +139,7 @@ const BattleNewApproach = ({
   const renderEnemyAttack = (enemyAttackRoll) => {
     return (
       <React.Fragment>
-        <h5 className="attackRoll">ENEMY ATTACK ROLL - {enemyAttackRoll}</h5>
+        <h5 className="attackRoll">Your foe has rolled a {enemyAttackRoll}</h5>
         <h5 className="attackText">
           A virulent blow across your face sprays a fine mist of blood into the
           air for {enemyAttackRange} damage.
@@ -147,7 +151,7 @@ const BattleNewApproach = ({
   const renderEnemyMissed = (enemyAttackRoll) => {
     return (
       <React.Fragment>
-        <h5 className="attackRoll">ENEMY ATTACK ROLL - {enemyAttackRoll}</h5>
+        <h5 className="attackRoll">Your foe has rolled a {enemyAttackRoll}</h5>
         <h5 className="attackText">
           Your foe stumbles and clumsily misses you!
         </h5>
@@ -157,7 +161,7 @@ const BattleNewApproach = ({
   const renderPlayerMissed = (playerAttackRoll) => {
     return (
       <React.Fragment>
-        <h5 className="attackRoll">YOUR ATTACK ROLL - {playerAttackRoll}</h5>
+        <h5 className="attackRoll">You have rolled {playerAttackRoll}</h5>
         <h5 className="attackText">You swing wildly and miss!</h5>
       </React.Fragment>
     );
@@ -171,9 +175,9 @@ const BattleNewApproach = ({
 
     return (
       <React.Fragment>
-        <h5 className="attackRoll">ENEMY ATTACK ROLL - {enemyAttackRoll}</h5>
+        <h5 className="attackRoll">Your foe has rolled a {enemyAttackRoll}</h5>
         <h5 className="attackText">
-          YOUR FOE ROLLED A 20 AND RIPS A WET GAPING WOUND IN YOUR CHEST FOR DOUBLE DAMAGE! Blood paints the wall in Pollock-esque splatter as you suffer {doubleDamageVsPlayerAmount} damage.
+          YOUR FOE ROLLED A 20 AND RIPS A WET GAPING WOUND IN YOUR CHEST FOR DOUBLE DAMAGE! Blood paints the wall in a Pollock-esque splatter as you suffer {doubleDamageVsPlayerAmount} damage.
         </h5>
       </React.Fragment>
     );
@@ -187,7 +191,7 @@ const BattleNewApproach = ({
 
     return (
       <React.Fragment>
-        <h5 className="attackRoll">PLAYER ATTACK ROLL - {playerAttackRoll}</h5>
+        <h5 className="attackRoll">You have rolled a {playerAttackRoll}</h5>
         <h5 className="attackText">
           You unleash a victorious howl as you thrash your foe for DOULBLE
           DAMAGE, suffering a loss of {doubleDamageVsPlayerAmount} hit points.
@@ -203,10 +207,17 @@ const BattleNewApproach = ({
   console.log("game play music",isGameMusicPlaying )
 
   // INITIATIVE
+
+
+
   const beginAttack = () => {
     turnOnBattleMusic();
     turnOffGamePlayMusic();
     initiativeRoll = Math.floor(Math.random() * 20) + 1;
+
+    playerAttackRange = Math.floor(Math.random() * emoPhilips.damage) + 1;
+    enemyAttackRange = Math.floor(Math.random() * emoPhilips.damage) + 1;
+
     setPlayerMissed(false);
     setEnemyMissed(false);
     setIsPlayerWonInitiativeVisible(false);
@@ -230,7 +241,8 @@ const BattleNewApproach = ({
       playerAttack();
       setIsEnemyWonInitiativeVisible(true);
     }
-    return initiativeRoll;
+    return playerAttackRange
+    // return initiativeRoll, playerAttackRange;
   };
 
   // PLAYER ATTACK
@@ -238,12 +250,15 @@ const BattleNewApproach = ({
 
   console.log("playerattackRange LINE 230-----------", playerAttackRange);
   const playerAttack = () => {
+
     playerAttackRoll = Math.floor(Math.random() * 20) + 1;
+    playerAttackRange = Math.floor(Math.random() * damage) + 1;
+
     setIsDoubleDamageVsEnemy(false);
     setIsPlayerAttackVisible(false);
     setPlayerMissed(false);
     console.log("PLAYER ATTACK ROLL ________", playerAttackRoll);
-    if (playerAttackRoll === 20) {
+    if (playerAttackRoll > 10) {
       setIsDoubleDamageVsEnemy(true);
       doubleDamageVsEnemy();
       return;
@@ -254,17 +269,14 @@ const BattleNewApproach = ({
         "YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE",
         playerAttackRange,
       );
-      // console.log(
-      //   "EMO PHILIPS HAS THIS MANY HIT POINTS LEFT",
-      //   enemyHitPoints,
-      // );
       setIsPlayerAttackVisible(true);
     } else {
       setPlayerMissed(true);
       console.log("YOU SWING AT YOUR FOE AND MISS HORRIBLY");
     }
     isEnemyDeadCheck();
-    return playerAttackRoll;
+    // return playerAttackRoll;
+    return playerAttackRange
   };
 
   //ENEMY ATTACK
@@ -320,7 +332,7 @@ const BattleNewApproach = ({
 
   //DOUBLE DAMAGE
 
-  const doubleDamageVsEnemy = () => {
+  const doubleDamageVsEnemy = (playerAttackRange) => {
     if (playerAttackRange === 1) {
       doubleDamageVsEnemyAmount = 2;
     } else {
@@ -348,7 +360,7 @@ const BattleNewApproach = ({
     } else {
       doubleDamageVsPlayerAmount = enemyAttackRange * 2;
     }
-    setHitPoints(hitPoints -= doubleDamageVsPlayerAmount);
+    setHitPoints(hitPoints - doubleDamageVsPlayerAmount);
     console.log(
       "YOUR FOE INFLICTS THIS MUCH DAMAGE:",
       doubleDamageVsPlayerAmount,
@@ -356,6 +368,8 @@ const BattleNewApproach = ({
     return doubleDamageVsPlayerAmount;
   };
 
+
+  console.log("DOUBLE DAMAGE vs Player in body", doubleDamageVsPlayerAmount);
   //RUN
 
   const handleRunButton = () => {
@@ -381,7 +395,7 @@ const BattleNewApproach = ({
         <React.Fragment>
           {renderPlayerWonInitiative(initiativeRoll)}
           {playerMissed && renderPlayerMissed(playerAttackRoll)}
-          {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll)}
+          {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll, playerAttackRange)}
           {IsDoubleDamageVsEnemy &&
             renderDoubleDamageVsEnemy(
               playerAttackRoll,
@@ -418,7 +432,7 @@ const BattleNewApproach = ({
 
           {/* {renderPlayerWonInitiative(initiativeRoll)} */}
           {playerMissed && renderPlayerMissed(playerAttackRoll)}
-          {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll)}
+          {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll, playerAttackRange)}
           {IsDoubleDamageVsEnemy &&
             renderDoubleDamageVsEnemy(
               playerAttackRoll,
