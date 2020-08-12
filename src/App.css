@@ -354,6 +354,47 @@ margin-top: 30px;
   font-size: 40px;
 }
 
+.lootWrapper{
+  padding: 20px;
+ text-align: center;
+ border: 5px double white;
+width: 1000px;
+height: 700px;
+margin: 0 auto;
+margin-top: 30px;
+ background-image: url(./media/blood_pix.png);
+}
+
+.lootText{
+  font-size: 40px;
+}
+
+.lootButtonWrapper {
+   text-align: center;
+ font-size: 30px;
+  border: double white;
+  width: 190px;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: inline-block;
+  margin: 20px;
+
+}
+
+.linkButton {
+     text-align: center;
+ font-size: 30px;
+  border: double white;
+  width: 190px;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: inline-block;
+  margin: 20px;
+  font-family: 'Red Rose', cursive;
+}
+
 .areDeadText {
   font-size: 80px;
 }

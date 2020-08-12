@@ -65,6 +65,7 @@ const BattleNewApproach = ({
 
 
 
+  
  
   useEffect(() => {
     const loadEmo = () => {
@@ -331,6 +332,7 @@ const BattleNewApproach = ({
             pathname: "/BattleVictory",
           }}
         />
+    
       );
     }
   };
@@ -417,10 +419,12 @@ const BattleNewApproach = ({
     if (isPlayerWonInitiativeVisible) {
       return (
         <React.Fragment>
+  
 
           {renderPlayerWonInitiative(initiativeRoll)}
           {playerMissed && renderPlayerMissed(playerAttackRoll)}
-          {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll, playerAttackRange)}
+          {isPlayerAttackVisible &&
+            renderPlayerAttack(playerAttackRoll, playerAttackRange)}
           {IsDoubleDamageVsEnemy &&
             renderDoubleDamageVsEnemy(
               playerAttackRoll,
@@ -446,6 +450,9 @@ const BattleNewApproach = ({
     if (isEnemyWonInitiativeVisible) {
       return (
         <React.Fragment>
+       
+
+
           {renderEnemyWonInitiative(initiativeRoll)}
           {enemyMissed && renderEnemyMissed(enemyAttackRoll)}
           {isEnemyAttackVisible && renderEnemyAttack(enemyAttackRoll)}
@@ -454,10 +461,10 @@ const BattleNewApproach = ({
               enemyAttackRoll,
               doubleDamageVsPlayerAmount,
             )}
-
           {/* {renderPlayerWonInitiative(initiativeRoll)} */}
           {playerMissed && renderPlayerMissed(playerAttackRoll)}
-          {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll, playerAttackRange)}
+          {isPlayerAttackVisible &&
+            renderPlayerAttack(playerAttackRoll, playerAttackRange)}
           {IsDoubleDamageVsEnemy &&
             renderDoubleDamageVsEnemy(
               playerAttackRoll,

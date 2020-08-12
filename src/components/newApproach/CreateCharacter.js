@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AREAONE } from "../../constants/Story";
 import carrotTop from "../../media/carrot-top.png";
-import emo from "../../media/emo.jpg";
+import emo from "../../media/emo8-bit.png";
 import { WEAPONS } from "../../constants/Weapons";
 import gamePlay from "../../media/gameplay.mp3";
 import ReactHowler from "react-howler";
