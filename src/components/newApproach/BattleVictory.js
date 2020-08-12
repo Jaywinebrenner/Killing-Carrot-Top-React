@@ -77,7 +77,7 @@ const BattleVictory = ({ isRunVisible }) => {
          cling to the hand. The taste of garlic, chives and sumptious
          flesh fill your mouth. You feel no regret. You receive 7 hit points.
        </h5>
-       <Link className="linkButton" style={{ textDecoration: "none", color: "white" }} to="/Game">
+       <Link className="linkButton" onClick={() => {}} style={{ textDecoration: "none", color: "white" }} to="/Game">
          Continue
        </Link>
      </div>
