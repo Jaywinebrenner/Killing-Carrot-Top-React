@@ -30,6 +30,7 @@ export const CreateCharacter = ({
          armor,
          encounterOne,
          setChapterOne,
+         setCreateCharacter,
          isGameMusicPlaying,
          toggleGamePlayMusic,
        }) => {
@@ -331,6 +332,7 @@ export const CreateCharacter = ({
                    onClick={() => {
                      setIsArmorChoiceVisible(false);
                      setChapterOne(true);
+                     setCreateCharacter(false)
                    }}
                    className="beginThyAdventureButtonText"
                  >

@@ -4,6 +4,7 @@ import { Redirect, Route } from "react-router-dom";
 import { RUN } from "../../constants/Story";
 import { twentySidedDie } from "../../constants/Dice";
 import Typewriter from "typewriter-effect";
+import BattleVictory from "./BattleVictory";
 
 
 // need to figure out how to print out playerAttackRange 
@@ -327,12 +328,14 @@ const BattleNewApproach = ({
     console.log("enemy hit points in IN CHECK?", enemyHitPoints);
     if (enemyHitPoints < 1) {
       return (
+ 
         <Redirect
           to={{
             pathname: "/BattleVictory",
+            state: { defence },
           }}
         />
-    
+        
       );
     }
   };

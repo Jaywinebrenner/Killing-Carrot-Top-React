@@ -30,14 +30,17 @@ const Game = () => {
   const [battleTextDisplayed, setBattleTextDisplayed] = useState(false);
   const [isEmoImageVisible, setIsEmoImageVisible] = useState(false);
   const [armor, setArmor] = useState("Naked");
-  const [chapterOne, setChapterOne] = useState(false);
   const [battleEmo, setBattleEmo] = useState(false);
   const [battleButtonsOn, setBattleButtonsOn] = useState(false);
   const [playerInitiativeVisible, setPlayerInitiativeVisible] = useState(false);
-
+  
   const [enemyHitPoints, setEnemyHitPoints] = useState(null);
   const [enemyDamage, setEnemyDamage] = useState(null);
   const [enemyDefence, setEnemyDefence] = useState(null);
+  
+  const [createCharacterVisible, setCreateCharacterVisible] = useState(true)
+  const [chapterOne, setChapterOne] = useState(false);
+  const [chapterTwo, setChapterTwo] = useState(false);
 
 
 
@@ -133,7 +136,7 @@ const Game = () => {
 
         <div className="gameWindowWrapper">
           {" "}
-          <CreateCharacter
+          {createCharacterVisible && (<CreateCharacter
             turnOnBattleMusic={turnOnBattleMusic}
             turnOffGamePlayMusic={isGameMusicPlaying}
             setIsGameMusicPlaying={setIsGameMusicPlaying}
@@ -153,7 +156,8 @@ const Game = () => {
             setArmor={setArmor}
             chapterOne={chapterOne}
             setChapterOne={setChapterOne}
-          />
+            setCreateCharacterVisible={setCreateCharacterVisible}
+          />)}
           {chapterOne && (
             <ChapterOne
               armor={armor}

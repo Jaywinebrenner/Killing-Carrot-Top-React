@@ -194,7 +194,7 @@ margin-top: 30px;
   height: 220px;
    display: grid;
 column-gap: 0em;
- grid-template-columns: 270px 480px 240px;
+ grid-template-columns: 280px 470px 240px;
  border-bottom: 5px double white;
 text-align: left;
 }
@@ -366,7 +366,12 @@ margin-top: 30px;
 }
 
 .lootText{
-  font-size: 40px;
+  font-size: 25px;
+}
+
+.lootTextSubheader {
+  padding-top: 120px;
+  font-size: 25px;
 }
 
 .lootButtonWrapper {
@@ -396,7 +401,7 @@ margin-top: 30px;
 }
 
 .areDeadText {
-  font-size: 80px;
+  font-size: 60px;
 }
 
 .tryAgainButtonWrapper{
