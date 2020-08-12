@@ -85,10 +85,9 @@ const BattleVictory = ({ isRunVisible }) => {
  }
 
  const renderLootResultNo = () => {
-
    if (lootResultNo) {
      return (
-       <div className="lootWrapper">
+       <div>
          <h5>
            You are filled with disgust at the thought of entertaining eating a
            human hand. This hand, after all, likely belonged to some poor broken
@@ -102,12 +101,20 @@ const BattleVictory = ({ isRunVisible }) => {
          >
            Continue
          </Link>
-         {/* <Game/> */}
+         {/* <Game/>
+         <h2 onClick={() => goBackToGame()}>Go Back To Game</h2> */}
        </div>
      );
    }
-
  }
+
+ const goBackToGame = () => {
+    setLootResultYes(false);
+     setLootResultNo(false);
+    return (
+      <Game/>
+    )
+ };
 
  
 
