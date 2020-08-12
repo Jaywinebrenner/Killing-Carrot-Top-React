@@ -39,13 +39,21 @@ const Game = () => {
   const [enemyDefence, setEnemyDefence] = useState(null);
 
  
-  
+  const [gameComponentVisible, setGameComponentVisible] = useState(true);
   const [createCharacterVisible, setCreateCharacterVisible] = useState(true)
   const [chapterOne, setChapterOne] = useState(false);
   const [chapterTwo, setChapterTwo] = useState(false);
 
 
 console.log("CREATE CHAR VISIBLE", createCharacterVisible);
+
+
+
+  useEffect(() => {
+    let mounted = true;
+    if (createCharacterVisible) return () => (mounted = false);
+  }, []);
+
 
 // Render Image Stuff
   const renderEmoImage = (imageName) => {
@@ -196,6 +204,7 @@ console.log("CREATE CHAR VISIBLE", createCharacterVisible);
               enemyDefence={enemyDefence}
               setEnemyDefence={setEnemyDefence}
               setCreateCharacterVisible={setCreateCharacterVisible}
+            
             />
           )}
         </div>

@@ -1,18 +1,19 @@
 import { DEAD } from "../../constants/Story";
 import React, { useState } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link, useHistory } from "react-router-dom";
 import Game from "./Game";
 
-const BattleVictory = (props, { isRunVisible }) => {
+const BattleVictory = (props, { isRunVisible, setCreateCharacterVisible }) => {
   const [victoryMessage, setVictoryMessage] = useState(true);
   const [pushedContinue, setPushedContinue] = useState(false);
   const [lootOptionsVisible, setLootOptionsVisible] = useState(false);
   const [lootResultYes, setLootResultYes] = useState(false);
   const [lootResultNo, setLootResultNo] = useState(false);
 
- // Prop passed via Redirect Component on BattleNewApproach
-let setCreateCharacterVisible= props.location.setCreateCharacterVisible;
+  // Prop passed via Redirect Component on BattleNewApproach
+  // let setCreateCharacterVisible= props.location.setCreateCharacterVisible;
 
+  // Prop passed from battle victory componen
 
   const renderVictoryMessage = () => {
     return (
@@ -80,6 +81,10 @@ let setCreateCharacterVisible= props.location.setCreateCharacterVisible;
             which cling to the hand. The taste of garlic, chives and sumptious
             flesh fill your mouth. You feel no regret. You receive 7 hit points.
           </h5>
+
+          {/* <h1 color="primary" className="px-4" onClick={goBackToGame()}>
+            Go to game
+          </h1> */}
           <Link
             className="linkButton"
             onClick={() => {
@@ -94,10 +99,13 @@ let setCreateCharacterVisible= props.location.setCreateCharacterVisible;
       );
   };
 
+  const history = useHistory();
+
   const goBackToGame = () => {
-    setCreateCharacterVisible(false)
+    setCreateCharacterVisible(false);
     setLootResultYes(false);
     setLootResultNo(false);
+    history.push("/Game");
   };
 
   const renderLootResultNo = () => {
@@ -120,8 +128,6 @@ let setCreateCharacterVisible= props.location.setCreateCharacterVisible;
           >
             Continue
           </Link>
-          {/* <Game/>
-         <h2 onClick={() => goBackToGame()}>Go Back To Game</h2> */}
         </div>
       );
     }

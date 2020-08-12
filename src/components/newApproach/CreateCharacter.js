@@ -48,7 +48,7 @@ export const CreateCharacter = ({
            return (
              <div>
                <h3>What is thy name, Comedian Slayer?</h3>
-               <div class="inputCursor">
+               <div className="inputCursor">
                  <input
                   ref={input => input && input.focus()}
                    className="submitNameInput"

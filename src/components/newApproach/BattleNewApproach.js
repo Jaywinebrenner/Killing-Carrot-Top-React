@@ -5,6 +5,7 @@ import { RUN } from "../../constants/Story";
 import { twentySidedDie } from "../../constants/Dice";
 import Typewriter from "typewriter-effect";
 import Game from "./Game";
+import BattleVictory from "./BattleVictory";
 
 // need to figure out how to print out playerAttackRange 
  
@@ -39,11 +40,14 @@ const BattleNewApproach = ({
   turnOffGamePlayMusic,
   turnOnBattleMusic,
   isGameMusicPlaying,
-  setCreateCharacterVisible
+  setCreateCharacterVisible,
+
 }) => {
   // const [enemyHitPoints, setEnemyHitPoints] = useState(null);
   // const [enemyDamage, setEnemyDamage] = useState(null);
   // const [enemyDefence, setEnemyDefence] = useState(null);
+
+  console.log("CREAT CHAR ON BATTLE ONLY", setCreateCharacterVisible);
 
   const [
     isPlayerWonInitiativeVisible,
@@ -207,6 +211,7 @@ const BattleNewApproach = ({
   // INITIATIVE
 
   const beginAttack = () => {
+
     turnOnBattleMusic();
     turnOffGamePlayMusic();
     initiativeRoll = Math.floor(Math.random() * 20) + 1;
@@ -313,18 +318,19 @@ const BattleNewApproach = ({
     }
   };
 
-
-
   const isEnemyDeadCheck = () => {
     if (enemyHitPoints < 1) {
       return (
-        <Redirect
-          to={{
-            pathname: "/BattleVictory",
-            setCreateCharacterVisible: setCreateCharacterVisible,
-
-          }}
+        <BattleVictory
+        setCreateCharacterVisible={setCreateCharacterVisible}
         />
+        // <Redirect
+        //   to={{
+        //     pathname: "/BattleVictory",
+        //     setCreateCharacterVisible: setCreateCharacterVisible,
+         
+        //   }}
+        // />
       );
     }
   };
