@@ -63,6 +63,8 @@ const BattleNewApproach = ({
   const [isPlayerDead, setIsPlayerDead] = useState(true);
   const [isEnemyDead, setIsEnemyDead] = useState(true);
 
+
+
  
   useEffect(() => {
     const loadEmo = () => {
@@ -415,6 +417,7 @@ const BattleNewApproach = ({
     if (isPlayerWonInitiativeVisible) {
       return (
         <React.Fragment>
+
           {renderPlayerWonInitiative(initiativeRoll)}
           {playerMissed && renderPlayerMissed(playerAttackRoll)}
           {isPlayerAttackVisible && renderPlayerAttack(playerAttackRoll, playerAttackRange)}

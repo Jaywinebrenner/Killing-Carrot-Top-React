@@ -379,7 +379,7 @@ export const CreateCharacter = ({
 
          return (
            <React.Fragment>
-             {/* {isOneVisible && name != '' ? renderOne : <h1>ENTER THY NAME!</h1>} */}
+          
              {isOneVisible && renderOne()}
              {isTwoVisible && renderTwo()}
              {isWeaponChoiceTextVisible && renderPostWeaponChoiceText()}
