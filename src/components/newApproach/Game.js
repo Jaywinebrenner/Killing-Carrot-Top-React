@@ -45,7 +45,7 @@ const Game = () => {
   const [chapterTwo, setChapterTwo] = useState(false);
 
 
-
+console.log("CREATE CHAR VISIBLE", createCharacterVisible);
 
 // Render Image Stuff
   const renderEmoImage = (imageName) => {
@@ -138,28 +138,30 @@ const Game = () => {
 
         <div className="gameWindowWrapper">
           {" "}
-          {createCharacterVisible && (<CreateCharacter
-            turnOnBattleMusic={turnOnBattleMusic}
-            turnOffGamePlayMusic={isGameMusicPlaying}
-            setIsGameMusicPlaying={setIsGameMusicPlaying}
-            name={name}
-            setName={setName}
-            hitPoints={hitPoints}
-            setHitPoints={setHitPoints}
-            damage={damage}
-            setDamage={setDamage}
-            defence={defence}
-            setDefence={setDefence}
-            weapon={weapon}
-            setWeapon={setWeapon}
-            damageString={damageString}
-            setDamageString={setDamageString}
-            armor={armor}
-            setArmor={setArmor}
-            chapterOne={chapterOne}
-            setChapterOne={setChapterOne}
-            setCreateCharacterVisible={setCreateCharacterVisible}
-          />)}
+          {createCharacterVisible && (
+            <CreateCharacter
+              turnOnBattleMusic={turnOnBattleMusic}
+              turnOffGamePlayMusic={isGameMusicPlaying}
+              setIsGameMusicPlaying={setIsGameMusicPlaying}
+              name={name}
+              setName={setName}
+              hitPoints={hitPoints}
+              setHitPoints={setHitPoints}
+              damage={damage}
+              setDamage={setDamage}
+              defence={defence}
+              setDefence={setDefence}
+              weapon={weapon}
+              setWeapon={setWeapon}
+              damageString={damageString}
+              setDamageString={setDamageString}
+              armor={armor}
+              setArmor={setArmor}
+              chapterOne={chapterOne}
+              setChapterOne={setChapterOne}
+              setCreateCharacterVisible={setCreateCharacterVisible}
+            />
+          )}
           {chapterOne && (
             <ChapterOne
               armor={armor}
@@ -193,6 +195,7 @@ const Game = () => {
               setEnemyDamage={setEnemyDamage}
               enemyDefence={enemyDefence}
               setEnemyDefence={setEnemyDefence}
+              setCreateCharacterVisible={setCreateCharacterVisible}
             />
           )}
         </div>

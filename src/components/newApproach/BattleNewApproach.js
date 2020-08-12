@@ -38,7 +38,8 @@ const BattleNewApproach = ({
   setEnemyDefence,
   turnOffGamePlayMusic,
   turnOnBattleMusic,
-  isGameMusicPlaying
+  isGameMusicPlaying,
+  setCreateCharacterVisible
 }) => {
   // const [enemyHitPoints, setEnemyHitPoints] = useState(null);
   // const [enemyDamage, setEnemyDamage] = useState(null);
@@ -63,13 +64,8 @@ const BattleNewApproach = ({
   const [isPlayerDead, setIsPlayerDead] = useState(true);
   const [isEnemyDead, setIsEnemyDead] = useState(true);
 
-
-
-  
- 
   useEffect(() => {
     const loadEmo = () => {
-
       // setPlayerAttackRange(Math.floor(Math.random() * damage) + 1);
       // setEnemyAttackRange(
       //   Math.floor(Math.random() * emoPhilips.damage) + 1,
@@ -124,12 +120,10 @@ const BattleNewApproach = ({
       </React.Fragment>
     );
   };
-  
 
   const renderPlayerAttack = (playerAttackRoll, playerAttackRange) => {
     return (
       <React.Fragment>
-
         <h5 className="attackRoll"> You have rolled a {playerAttackRoll}</h5>
         <h5 className="attackText">
           You have thrashed your foe for {playerAttackRange} damage!
@@ -179,7 +173,9 @@ const BattleNewApproach = ({
       <React.Fragment>
         <h5 className="attackRoll">Your foe has rolled a {enemyAttackRoll}</h5>
         <h5 className="attackText">
-          YOUR FOE ROLLED A 20 AND RIPS A WET GAPING WOUND IN YOUR CHEST FOR DOUBLE DAMAGE! Blood paints the wall in a Pollock-esque splatter as you suffer {doubleDamageVsPlayerAmount} damage.
+          YOUR FOE ROLLED A 20 AND RIPS A WET GAPING WOUND IN YOUR CHEST FOR
+          DOUBLE DAMAGE! Blood paints the wall in a Pollock-esque splatter as
+          you suffer {doubleDamageVsPlayerAmount} damage.
         </h5>
       </React.Fragment>
     );
@@ -206,11 +202,9 @@ const BattleNewApproach = ({
   console.log("You have this many Hit Points", hitPoints);
   console.log("isPlayerWonInitiativeVisible", isPlayerWonInitiativeVisible);
   console.log("__________________________________________________");
-  console.log("game play music",isGameMusicPlaying )
+  console.log("game play music", isGameMusicPlaying);
 
   // INITIATIVE
-
-
 
   const beginAttack = () => {
     turnOnBattleMusic();
@@ -248,15 +242,13 @@ const BattleNewApproach = ({
       playerAttack();
       setIsEnemyWonInitiativeVisible(true);
     }
-    return playerAttackRange
+    return playerAttackRange;
     // return initiativeRoll, playerAttackRange;
   };
 
   // PLAYER ATTACK
 
-
   const playerAttack = () => {
-
     playerAttackRoll = Math.floor(Math.random() * 20) + 1;
     playerAttackRange = Math.floor(Math.random() * damage) + 1;
 
@@ -321,17 +313,16 @@ const BattleNewApproach = ({
     }
   };
 
-  console.log("enemy hit points in IN BODY?", enemyHitPoints);
+
 
   const isEnemyDeadCheck = () => {
-    console.log("enemy hit points in IN CHECK?", enemyHitPoints);
     if (enemyHitPoints < 1) {
       return (
-  
         <Redirect
           to={{
             pathname: "/BattleVictory",
-            state: { defence },
+            setCreateCharacterVisible: setCreateCharacterVisible,
+
           }}
         />
       );
@@ -340,18 +331,11 @@ const BattleNewApproach = ({
 
   //DOUBLE DAMAGE
 
- 
-
-
   const doubleDamageVsEnemy = (playerAttackRange) => {
     console.log("2222222- player attack range in", doubleDamageVsEnemyAmount);
-      console.log(
-        "22222- DoubleDamageAmount in DD",
-        doubleDamageVsEnemyAmount,
-      );
-      console.log("222222PLayer ATTACK RANGE in DD", playerAttackRange);
-      doubleDamageVsEnemyAmount = playerAttackRange * 2;
-
+    console.log("22222- DoubleDamageAmount in DD", doubleDamageVsEnemyAmount);
+    console.log("222222PLayer ATTACK RANGE in DD", playerAttackRange);
+    doubleDamageVsEnemyAmount = playerAttackRange * 2;
 
     // if (playerAttackRange === 1) {
     //   doubleDamageVsEnemyAmount = 2;
@@ -359,23 +343,20 @@ const BattleNewApproach = ({
     //   doubleDamageVsEnemyAmount = playerAttackRange * 2;
     // }
     console.log(
-      "YOU ROLLED A 20 AND UNLEASH A DEEP BELLOWING HOWL AS YOU TRASH YOUR FOE FOR DOUBLE DAMAGE", 
+      "YOU ROLLED A 20 AND UNLEASH A DEEP BELLOWING HOWL AS YOU TRASH YOUR FOE FOR DOUBLE DAMAGE",
     );
 
-
-   
     setEnemyHitPoints(enemyHitPoints - doubleDamageVsEnemyAmount);
     console.log(
       "YOU HIT YOUR FOE AND INFLICT THIS MUCH DAMAGE",
       doubleDamageVsEnemyAmount,
     );
-      console.log(
-        "22222222- doubleDamageVsEnemyAmount",
-        doubleDamageVsEnemyAmount,
-      );
+    console.log(
+      "22222222- doubleDamageVsEnemyAmount",
+      doubleDamageVsEnemyAmount,
+    );
     return doubleDamageVsEnemyAmount;
   };
-
 
   const doubleDamageVsPlayer = (enemyAttackRange) => {
     setIsDoubleDamageVsPlayer(true);
@@ -394,7 +375,6 @@ const BattleNewApproach = ({
     );
     return doubleDamageVsPlayerAmount;
   };
-
 
   console.log("DOUBLE DAMAGE vs Player in body", doubleDamageVsPlayerAmount);
   //RUN
@@ -420,8 +400,6 @@ const BattleNewApproach = ({
     if (isPlayerWonInitiativeVisible) {
       return (
         <React.Fragment>
-  
-
           {renderPlayerWonInitiative(initiativeRoll)}
           {playerMissed && renderPlayerMissed(playerAttackRoll)}
           {isPlayerAttackVisible &&
@@ -451,9 +429,6 @@ const BattleNewApproach = ({
     if (isEnemyWonInitiativeVisible) {
       return (
         <React.Fragment>
-       
-
-
           {renderEnemyWonInitiative(initiativeRoll)}
           {enemyMissed && renderEnemyMissed(enemyAttackRoll)}
           {isEnemyAttackVisible && renderEnemyAttack(enemyAttackRoll)}
