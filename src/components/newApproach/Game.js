@@ -18,7 +18,7 @@ import battle from "../../media/battle.mp3";
 // import victory from "../../media/victory.mp3";
 // import death from "../../media/death.mp3";
 import ReactHowler from "react-howler";
-
+import { Redirect, Link, useHistory } from "react-router-dom";
 
 const Game = () => {
   const [name, setName] = useState(null)
@@ -39,7 +39,7 @@ const Game = () => {
   const [enemyDefence, setEnemyDefence] = useState(null);
 
  
-  const [gameComponentVisible, setGameComponentVisible] = useState(true);
+  const [gameWindowVisible, setGameWindowVisible] = useState(true);
   const [createCharacterVisible, setCreateCharacterVisible] = useState(true)
   const [chapterOne, setChapterOne] = useState(false);
   const [chapterTwo, setChapterTwo] = useState(false);
@@ -110,118 +110,122 @@ console.log("CREATE CHAR VISIBLE", createCharacterVisible);
       setIsDeathMusicPlaying(true);
     };
 
-  return (
-    <div>
-      <div className="homeWrapper">
-        <div className="headerWrapper">
-          <div className="headerColOne">
-            <img className="carrotTopThumbNail" src={carrotTop} />
-          </div>
-          <div className="headerColTwo">
-            <h1 className="headerText">KILLING CARROT TOP</h1>
-          </div>
-        </div>
 
-        <div className="statWrapper">
-          <div className="statColOne">
-            <Stats
-              hitPoints={hitPoints}
-              damage={damage}
-              damageString={damageString}
-              armor={armor}
-              weapon={weapon}
-              name={name}
-              defence={defence}
-            />
-          </div>
 
-          <div className="statColTwo">
-            {isEmoImageVisible && renderEmemyBlurb()}
-          </div>
 
-          <div className="statColThree">
-            {isEmoImageVisible && renderEmoImage()}
-          </div>
-        </div>
+    const renderGameWindow = () => {
+      return (
+        <div>
+          <div className="homeWrapper">
+            <div className="headerWrapper">
+              <div className="headerColOne">
+                <img className="carrotTopThumbNail" src={carrotTop} />
+              </div>
+              <div className="headerColTwo">
+                <h1 className="headerText">KILLING CARROT TOP</h1>
+              </div>
+            </div>
 
-        <div className="gameWindowWrapper">
-          {" "}
-          {createCharacterVisible && (
-            <CreateCharacter
-              turnOnBattleMusic={turnOnBattleMusic}
-              turnOffGamePlayMusic={isGameMusicPlaying}
-              setIsGameMusicPlaying={setIsGameMusicPlaying}
-              name={name}
-              setName={setName}
-              hitPoints={hitPoints}
-              setHitPoints={setHitPoints}
-              damage={damage}
-              setDamage={setDamage}
-              defence={defence}
-              setDefence={setDefence}
-              weapon={weapon}
-              setWeapon={setWeapon}
-              damageString={damageString}
-              setDamageString={setDamageString}
-              armor={armor}
-              setArmor={setArmor}
-              chapterOne={chapterOne}
-              setChapterOne={setChapterOne}
-              setCreateCharacterVisible={setCreateCharacterVisible}
-            />
-          )}
-          {chapterOne && (
-            <ChapterOne
-              armor={armor}
-              battleEmo={battleEmo}
-              setBattleEmo={setBattleEmo}
-              setIsEmoImageVisible={setIsEmoImageVisible}
-            />
-          )}
-          {battleEmo && (
-            <BattleNewApproach
-              isGameMusicPlaying={isGameMusicPlaying}
-              turnOnBattleMusic={turnOnBattleMusic}
-              turnOffGamePlayMusic={turnOffGamePlayMusic}
-              hitPoints={hitPoints}
-              setHitPoints={setHitPoints}
-              damage={damage}
-              setDamage={setDamage}
-              weapon={weapon}
-              setWeapon={setWeapon}
-              name={name}
-              setName={setName}
-              defence={defence}
-              setDefence={setDefence}
-              setBattleEmo={setBattleEmo}
-              battleEmo={battleEmo}
-              playerInitiativeVisible={playerInitiativeVisible}
-              setPlayerInitiativeVisible={setPlayerInitiativeVisible}
-              enemyHitPoints={enemyHitPoints}
-              setEnemyHitPoints={setEnemyHitPoints}
-              enemyDamage={enemyDamage}
-              setEnemyDamage={setEnemyDamage}
-              enemyDefence={enemyDefence}
-              setEnemyDefence={setEnemyDefence}
-              setCreateCharacterVisible={setCreateCharacterVisible}
+            <div className="statWrapper">
+              <div className="statColOne">
+                <Stats
+                  hitPoints={hitPoints}
+                  damage={damage}
+                  damageString={damageString}
+                  armor={armor}
+                  weapon={weapon}
+                  name={name}
+                  defence={defence}
+                />
+              </div>
+
+              <div className="statColTwo">
+                {isEmoImageVisible && renderEmemyBlurb()}
+              </div>
+
+              <div className="statColThree">
+                {isEmoImageVisible && renderEmoImage()}
+              </div>
+            </div>
+
+            <div className="gameWindowWrapper">
+              {" "}
+              {createCharacterVisible && (
+                <CreateCharacter
+                  turnOnBattleMusic={turnOnBattleMusic}
+                  turnOffGamePlayMusic={isGameMusicPlaying}
+                  setIsGameMusicPlaying={setIsGameMusicPlaying}
+                  name={name}
+                  setName={setName}
+                  hitPoints={hitPoints}
+                  setHitPoints={setHitPoints}
+                  damage={damage}
+                  setDamage={setDamage}
+                  defence={defence}
+                  setDefence={setDefence}
+                  weapon={weapon}
+                  setWeapon={setWeapon}
+                  damageString={damageString}
+                  setDamageString={setDamageString}
+                  armor={armor}
+                  setArmor={setArmor}
+                  chapterOne={chapterOne}
+                  setChapterOne={setChapterOne}
+                  setCreateCharacterVisible={setCreateCharacterVisible}
+                />
+              )}
+              {chapterOne && (
+                <ChapterOne
+                  armor={armor}
+                  battleEmo={battleEmo}
+                  setBattleEmo={setBattleEmo}
+                  setIsEmoImageVisible={setIsEmoImageVisible}
+                />
+              )}
+              {battleEmo && (
+                <BattleNewApproach
+                  isGameMusicPlaying={isGameMusicPlaying}
+                  turnOnBattleMusic={turnOnBattleMusic}
+                  turnOffGamePlayMusic={turnOffGamePlayMusic}
+                  hitPoints={hitPoints}
+                  setHitPoints={setHitPoints}
+                  damage={damage}
+                  setDamage={setDamage}
+                  weapon={weapon}
+                  setWeapon={setWeapon}
+                  name={name}
+                  setName={setName}
+                  defence={defence}
+                  setDefence={setDefence}
+                  setBattleEmo={setBattleEmo}
+                  battleEmo={battleEmo}
+                  playerInitiativeVisible={playerInitiativeVisible}
+                  setPlayerInitiativeVisible={setPlayerInitiativeVisible}
+                  enemyHitPoints={enemyHitPoints}
+                  setEnemyHitPoints={setEnemyHitPoints}
+                  enemyDamage={enemyDamage}
+                  setEnemyDamage={setEnemyDamage}
+                  enemyDefence={enemyDefence}
+                  setEnemyDefence={setEnemyDefence}
+                  setCreateCharacterVisible={setCreateCharacterVisible}
             
-            />
-          )}
-        </div>
-      </div>
-      <ReactHowler
-        src={gamePlay}
-        volume={0.4}
-        loop={true}
-        playing={isGameMusicPlaying}
-      />
-      <ReactHowler
-        src={battle}
-        volume={0.3}
-        loop={true}
-        playing={isBattleMusicPlaying}
-      />
-      {/* <ReactHowler
+                />
+              )}
+            </div>
+          </div>
+          <ReactHowler
+            src={gamePlay}
+            volume={0.4}
+            loop={true}
+            playing={isGameMusicPlaying}
+          />
+          <ReactHowler
+            src={battle}
+            volume={0.3}
+            loop={true}
+            playing={isBattleMusicPlaying}
+          />
+          {/* <ReactHowler
         src={victory}
         volume={0.3}
         loop={true}
@@ -233,8 +237,12 @@ console.log("CREATE CHAR VISIBLE", createCharacterVisible);
         loop={true}
         playing={isDeathMusicPlaying}
       /> */}
-    </div>
-  );
+        </div>
+      );
+    }
+
+
+  return <React.Fragment>{gameWindowVisible && renderGameWindow()}</React.Fragment>;
 }
 
 export default Game

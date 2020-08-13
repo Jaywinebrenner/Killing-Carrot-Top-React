@@ -9,6 +9,7 @@ import {BrowserRouter as Router, Switch, Link, Route } from "react-router-dom"
 import Game from "./components/newApproach/Game"
 import Run from "./components/newApproach/Run";
 import BattleVictory from "./components/newApproach/BattleVictory";
+import ChapterTwo from "./components/newApproach/ChapterTwo";
 
 
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Dead" exact={true} component={Dead} />
         <Route path="/Run" exact={true} component={Run} />
         <Route path="/BattleVictory" exact={true} component={BattleVictory} />
+        <Route path="/ChapterTwo" exact={true} component={ChapterTwo} />
         <Game />
       </Switch>
     </Router>

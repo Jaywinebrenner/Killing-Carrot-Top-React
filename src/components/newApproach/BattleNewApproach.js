@@ -211,7 +211,6 @@ const BattleNewApproach = ({
   // INITIATIVE
 
   const beginAttack = () => {
-
     turnOnBattleMusic();
     turnOffGamePlayMusic();
     initiativeRoll = Math.floor(Math.random() * 20) + 1;
@@ -321,16 +320,13 @@ const BattleNewApproach = ({
   const isEnemyDeadCheck = () => {
     if (enemyHitPoints < 1) {
       return (
-        <BattleVictory
-        setCreateCharacterVisible={setCreateCharacterVisible}
+        <Redirect
+          to={{
+            pathname: "/BattleVictory",
+            setCreateCharacterVisible: setCreateCharacterVisible,
+    
+          }}
         />
-        // <Redirect
-        //   to={{
-        //     pathname: "/BattleVictory",
-        //     setCreateCharacterVisible: setCreateCharacterVisible,
-         
-        //   }}
-        // />
       );
     }
   };

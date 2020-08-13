@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Redirect, Link, useHistory } from "react-router-dom";
 import Game from "./Game";
 
-const BattleVictory = (props, { isRunVisible, setCreateCharacterVisible }) => {
+const BattleVictory = (props, { isRunVisible  }) => {
   const [victoryMessage, setVictoryMessage] = useState(true);
   const [pushedContinue, setPushedContinue] = useState(false);
   const [lootOptionsVisible, setLootOptionsVisible] = useState(false);
@@ -11,9 +11,8 @@ const BattleVictory = (props, { isRunVisible, setCreateCharacterVisible }) => {
   const [lootResultNo, setLootResultNo] = useState(false);
 
   // Prop passed via Redirect Component on BattleNewApproach
-  // let setCreateCharacterVisible= props.location.setCreateCharacterVisible;
+  let setCreateCharacterVisible = props.location.setCreateCharacterVisible;
 
-  // Prop passed from battle victory componen
 
   const renderVictoryMessage = () => {
     return (
@@ -87,11 +86,13 @@ const BattleVictory = (props, { isRunVisible, setCreateCharacterVisible }) => {
           </h1> */}
           <Link
             className="linkButton"
-            onClick={() => {
-              goBackToGame();
-            }}
+            // onClick={() => {
+            //   goBackToGame();
+            //   setLootResultYes(false);
+            //   setLootResultNo(false);
+            // }}
             style={{ textDecoration: "none", color: "white" }}
-            to="/Game"
+            to="/ChapterTwo"
           >
             Continue
           </Link>
@@ -99,14 +100,13 @@ const BattleVictory = (props, { isRunVisible, setCreateCharacterVisible }) => {
       );
   };
 
-  const history = useHistory();
+  // const history = useHistory();
 
-  const goBackToGame = () => {
-    setCreateCharacterVisible(false);
-    setLootResultYes(false);
-    setLootResultNo(false);
-    history.push("/Game");
-  };
+  // const goBackToGame = () => {
+  //   setCreateCharacterVisible(false);
+  //   setLootResultYes(false);
+  //   setLootResultNo(false);
+  // };
 
   const renderLootResultNo = () => {
     if (lootResultNo) {
@@ -120,11 +120,11 @@ const BattleVictory = (props, { isRunVisible, setCreateCharacterVisible }) => {
           </h5>
           <Link
             className="linkButton"
-            onClick={() => {
-              goBackToGame();
-            }}
+            // onClick={() => {
+            //   goBackToGame();
+            // }}
             style={{ textDecoration: "none", color: "white" }}
-            to="/Game"
+            to="/ChapterTwo"
           >
             Continue
           </Link>
