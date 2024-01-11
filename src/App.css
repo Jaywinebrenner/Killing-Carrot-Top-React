@@ -14,25 +14,28 @@ font-family: 'Red Rose', cursive;
 .landingHeader {
   font-family: 'Metal Mania', cursive;
   letter-spacing: 23px;
-  font-size: 28px;
+  font-size: 38px;
   color :#8a0303;
-  margin-top: 600px;
-  margin-right: 300px;
+  margin-top: 50vh;
+  /* margin-right: 300px; */
   padding-top: 8px;
+  margin-left: 10vw;
 }
 
 .landingContinueButton{
-  margin-top: 100px;
   letter-spacing: 2px;
- font-size: 20px;
+  font-size: 30px;
+  position: absolute;
+  bottom: 15%;
+  right: 30%;
 }
 
 .startGameButtonText {
   letter-spacing: 2px;
   margin-top: 0;
- font-size: 20px;
+ font-size: 30px;
  margin-right: 800px;
-
+ margin-left: 10vw;
 }
 
 .introHeader {
@@ -44,18 +47,27 @@ font-family: 'Red Rose', cursive;
 .Typewriter__cursor{
    color: rgba(0, 0, 0, 0.0);
 }
+.Typewriter__wrapper {
+  font-size: 1.5rem;
+}
 
 /* INTRO PAGE */
 
 .introWholeWrapper{
-  padding: 20px;
+  /* padding: 20px;
   text-align: center;
   border: 5px double white;
   width: 1000px;
   height: 700px;
   margin: 0 auto;
   margin-top: 30px;
-  background-image: url(./media/blood_pix.png);
+  background-image: url(./media/blood_pix.png); */
+  border: 5px double white;
+  height: 100vh;
+   background-image: url(./media/blood_pix.png);
+   background-size: cover;
+   background-position: 21vw center;
+   padding: 0 10%;
   }
 
 .introTextWrapper{
@@ -63,11 +75,18 @@ height: 300px;
 }
 
 .introImageWrapper{
-
+  position: relative;
 }
 
+
+.carrotTopImageIntroTwo-wrapper {
+  position: absolute;
+  position: absolute;
+  bottom: -8px;
+}
 .carrotTopImageIntroTwo{
-  width: 340px;
+  width: 100%;
+
 }
 
 .headerText{
@@ -339,15 +358,19 @@ margin: 0;
   margin-top: 0;
 }
 
+#root {
+  /* max-width: 1200px;
+  margin: auto;
+  padding-left: 50px;
+  padding-right: 50px; */
+}
+
 .deadWrapper{
-  padding: 20px;
- text-align: center;
  border: 5px double white;
-width: 1000px;
-height: 700px;
-margin: 0 auto;
-margin-top: 30px;
+height: 100vh;
  background-image: url(./media/blood_pix.png);
+ background-size: cover;
+ background-position: 21vw center;
 }
 
 .deadText{

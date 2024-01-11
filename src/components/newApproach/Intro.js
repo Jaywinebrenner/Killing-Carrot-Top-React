@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { INTRO } from "../../constants/Story";
-import carrotTop from '../../media/carrot-top-10.png'
+import carrotTop from '../../media/carrot-top-10-1.png'
 import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 import ReactHowler from "react-howler";
@@ -21,10 +21,12 @@ const Intro = () => {
     const renderCarrotTopImage = () => {
       return (
         <React.Fragment>
-          <Link style={{ textDecoration: "none" }} to="/Game">
+          {/* <Link style={{ textDecoration: "none" }} to="/Game">
             <h1 className="landingContinueButton">CONTINUE</h1>
-          </Link>
-          <img className="carrotTopImageIntroTwo" src={carrotTop} />
+          </Link> */}
+          {/* <div className="carrotTopImageIntroTwo-wrapper">
+            <img className="carrotTopImageIntroTwo" src={carrotTop} />
+          </div> */}
         </React.Fragment>
       );
       }
@@ -123,6 +125,12 @@ const renderIntroText = () => {
         <div className="introImageWrapper">
           {isCarrotTopVisible && renderCarrotTopImage()}
         </div>
+        <div className="carrotTopImageIntroTwo-wrapper">
+            <img className="carrotTopImageIntroTwo" src={carrotTop} />
+        </div>
+        <Link style={{ textDecoration: "none" }} to="/Game">
+          <h1 className="landingContinueButton">CONTINUE</h1>
+        </Link>
       </div>
       // </div>
     );
